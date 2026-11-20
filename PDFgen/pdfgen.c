@@ -5819,3 +5819,4 @@ int pdf_save_encrypted(struct pdf_doc *pdf, const char *filename,
 
     return e;
 }
+ 

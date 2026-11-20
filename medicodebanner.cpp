@@ -93,9 +93,3 @@ cout << "\033[0m";
     }
 
 }
-
-int main()
-{
-    medicodebanner();
-    return 0;
-}

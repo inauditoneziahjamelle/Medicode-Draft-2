@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "mainmenu.h"
 #include "generalquestions.h"
@@ -7,48 +6,57 @@
 
 using namespace std;
 
-void mainmenu()
+void mainmenu(PatientData &patient, SymptomData &symptoms)
 {
     int choice;
 
-    cout << endl;
-    cout << "===============================================================" << endl;
-    cout << "                          \033[1mMAIN MENU\033[0m" << endl;
-    cout << "===============================================================" << endl;
-
-    cout << "1. REQUEST A DOCTOR" << endl;
-    cout << "2. PATIENT PROFILE" << endl;
-    cout << "3. EXIT" << endl;
-
-    cout << "Enter your choice: ";
-    cin >> choice;
-
-    switch (choice)
+    while (true)
     {
-        case 1:
-        {
-            generalquestions();
-            break;
-        }
+        cout << endl;
+        cout << "===============================================================" << endl;
+        cout << "                          \033[1mMAIN MENU\033[0m" << endl;
+        cout << "===============================================================" << endl;
 
-        case 2:
-        {
-            cout << endl;
-            cout << "Accessing Patient Profile..." << endl;
-            patientpersonalinfo();
-            break;
-        }
+        cout << "1. REQUEST A DOCTOR" << endl;
+        cout << "2. PATIENT PROFILE" << endl;
+        cout << "3. EXIT" << endl;
 
-        case 3:
-        {
-            exitprogram();
-            break;
-        }
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-        default:
+        switch (choice)
         {
-            cout << "Please choose a valid option." << endl;
-            break;
+            case 1:
+            {
+                if (generalquestions(symptoms))
+                {
+                    exitprogram();
+                    return;
+                }
+
+                break;
+            }
+
+            case 2:
+            {
+                cout << endl;
+                cout << "Accessing Patient Profile..." << endl;
+
+                // A separate profile-viewing function is needed here.
+                break;
+            }
+
+            case 3:
+            {
+                exitprogram();
+                return;
+            }
+
+            default:
+            {
+                cout << "Please choose a valid option." << endl;
+                break;
+            }
         }
     }
 }

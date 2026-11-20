@@ -34,7 +34,9 @@ void healthcarefacility()
     if (facilityChoice == 1)
     {
         cout << endl;
-        cout << "AVAILABLE PUBLIC DOCTORS" << endl;
+        cout << "\033[31m================================\033[0m" << endl;
+        cout << "\033[31m||\033[0m  AVAILABLE PUBLIC DOCTORS  \033[31m||\033[0m" << endl;
+        cout << "\033[31m================================\033[0m" << endl;
 
         cout << "1. Dr. Adrian Villanueva" << endl;
         cout << "2. Dr. Marcus Javier" << endl;
@@ -191,4 +193,9 @@ void healthcarefacility()
     cout << endl;
     cout << "Dialing the Doctor..." << endl;
     cout << endl;
+}
+int main()
+{
+    healthcarefacility();
+    return 0;
 }

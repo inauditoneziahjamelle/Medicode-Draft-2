@@ -15,9 +15,9 @@ void patientconsent()
     cout << "===============================================================" << endl;
 
     cout << "\033[3m";
-    cout << "       By using MEDICODE, your personal and medical information will be" << endl;
-    cout << "       collected to help provide healthcare navigation" << endl;
-    cout << "       and connect you with a GP." << endl << endl;
+    cout << "       By using MEDICODE, your personal and medical" << endl;
+    cout << "       information will becollected to help provide " << endl;
+    cout << "       healthcare navigation and connect you with a GP." << endl << endl;
     cout << "\033[0m";
 
     cout << "===============================================================" << endl;

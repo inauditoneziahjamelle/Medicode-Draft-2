@@ -1,6 +1,7 @@
 #include <iostream>
 #include "healthcarefacility.h"
 #include <string>
+#include "exitprogram.h"
 
 using namespace std;
 
@@ -148,13 +149,14 @@ void healthcarefacility()
     }
 
 
-    // BACK TO MAIN MENU
+        // BACK TO MAIN MENU
 
     else if (facilityChoice == 3)
     {
         cout << endl;
         cout << "Returning to Main Menu..." << endl;
 
+        return;
     }
 
 
@@ -163,10 +165,10 @@ void healthcarefacility()
     else if (facilityChoice == 4)
     {
         cout << endl;
-
         cout << "Exiting the program..." << endl;
+        exitprogram();
+        return;
     }
-
 
     // INVALID FACILITY
 

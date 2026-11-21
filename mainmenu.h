@@ -1,3 +1,9 @@
-#pragma once
+#ifndef MAINMENU_H
+#define MAINMENU_H
 
-void mainmenu();    
+#include "patientdata.h"
+#include "symptomdata.h"
+
+void mainmenu(PatientData &patient, SymptomData &symptoms);
+
+#endif

@@ -4,6 +4,7 @@
 #include <string>
 #include <set>
 #include "patientpersonalinfo.h"
+#include "mainmenu.h"
 
 using namespace std;
 
@@ -682,7 +683,10 @@ void patientpersonalinfo()
     {
         cout << endl;
         cout << "Proceeding to Main Menu..." << endl;
-    }
+         PatientData patient{};
+         SymptomData symptoms{};
+         mainmenu (patient, symptoms);
+    }   
     else if (choice == 2)
     {
         cout << endl;
@@ -697,9 +701,3 @@ void patientpersonalinfo()
 }
         
     
-
-int main()
-{
-    patientpersonalinfo();
-    return 0;
-}

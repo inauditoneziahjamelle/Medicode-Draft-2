@@ -5,9 +5,6 @@
 #include <set>
 #include "patientpersonalinfo.h"
 #include "mainmenu.h"
-#include "patientdata.h"
-#include "symptomdata.h"
-#include "exitprogram.h"
 
 using namespace std;
 
@@ -39,7 +36,7 @@ string generatePatientID()
 
 
 // PATIENT PERSONAL INFORMATION
-void patientpersonalinfo(PatientData &patient, SymptomData &symptoms)
+void patientpersonalinfo()
 {
     int choice;
     int sexChoice;
@@ -157,7 +154,7 @@ void patientpersonalinfo(PatientData &patient, SymptomData &symptoms)
 
         do {
             cout << "Please specify: ";
-            getline(cin, entry);
+            getline(cin, historyPresentIllness);
 
             if (tempOthers.empty()) {
                 tempOthers = entry;
@@ -395,13 +392,13 @@ void patientpersonalinfo(PatientData &patient, SymptomData &symptoms)
     cin >> option;
 
     if (option == 1) {
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Please specify: ";
-    getline(cin, othersFamily);
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Please specify: ";
+        getline(cin, maintenanceMeds);
     } else if (option == 2) {
-        othersFamily = "No";
+        othersMedical = "No";
     } else {
-        othersFamily = "Not Specified";
+        othersMedical = "Not Specified";
     }
 
     // V. SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY
@@ -489,7 +486,7 @@ void patientpersonalinfo(PatientData &patient, SymptomData &symptoms)
         } else {
             menarche = "Unknown";
         }
-     
+    } 
         cout << endl;
         cout << "MENSTRUAL HISTORY:" << endl;
         cout << "1. Regular" << endl;
@@ -602,7 +599,6 @@ void patientpersonalinfo(PatientData &patient, SymptomData &symptoms)
         } else {
             othersOBGyne = "No";
         }
-    }
     
 
 
@@ -687,12 +683,16 @@ void patientpersonalinfo(PatientData &patient, SymptomData &symptoms)
     {
         cout << endl;
         cout << "Proceeding to Main Menu..." << endl;
-        mainmenu(patient, symptoms);
-    }
+         PatientData patient{};
+         SymptomData symptoms{};
+         mainmenu (patient, symptoms);
+    }   
     else if (choice == 2)
     {
         cout << endl;
-        exitprogram();
+        cout << "MEDICODE - Quick Care, For A More Convenient Healthcare!"
+             << endl;
+        cout << "Thank you for using MEDICODE." << endl;
     }
     else
     {

@@ -1,10 +1,11 @@
 #include <iostream>
 #include "patientconsent.h"
 #include "exitprogram.h"
+#include "patientpersonalinfo.h"
 
 using namespace std;
 
-bool patientconsent()
+void patientconsent()
 {
     int choice;
 
@@ -31,17 +32,20 @@ bool patientconsent()
 
     if (choice == 1)
     {
-        return true;
+        cout << "Please input here your personal information." << endl;
+        patientpersonalinfo ();
+        return; 
     }
+    
     else if (choice == 2)
     {
         cout << "\nConsent was not provided. MEDICODE will now close." << endl;
         exitprogram();
-        return false;
+        return;
     }
     else
     {
         cout << "Invalid choice. Please choose either 1 or 2." << endl;
-        return patientconsent();
+        patientconsent();
     }
 }

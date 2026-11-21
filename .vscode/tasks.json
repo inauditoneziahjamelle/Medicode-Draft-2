@@ -10,6 +10,8 @@
                 "-std=c++17",
                 "main.cpp",
                 "mainmenu.cpp",
+                "patientprofile.cpp",
+                "updatepatientinfo.cpp",
                 "medicodebanner.cpp",
                 "patientconsent.cpp",
                 "patientpersonalinfo.cpp",

@@ -3,6 +3,7 @@
 #include "generalquestions.h"
 #include "patientpersonalinfo.h"
 #include "exitprogram.h"
+#include "patientprofile.h"
 
 using namespace std;
 
@@ -28,12 +29,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
         {
             case 1:
             {
-                if (generalquestions(symptoms))
-                {
-                    exitprogram();
-                    return;
-                }
-
+               generalquestions(symptoms);
                 break;
             }
 
@@ -41,8 +37,8 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
             {
                 cout << endl;
                 cout << "Accessing Patient Profile..." << endl;
-
-                // A separate profile-viewing function is needed here.
+                patientprofile(patient, symptoms);
+    
                 break;
             }
 

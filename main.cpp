@@ -11,7 +11,6 @@
 #include <cstdio>
 #include <sstream>
 #include <vector>
-
 #include "pdfgenerator.h"
 #include "PDFgen/pdfgen.h"
 
@@ -19,22 +18,14 @@
 #include <windows.h>
 #endif
 
+using namespace std;
 
 int main()
 {
-    PatientData patient{};
-    SymptomData symptoms{};
-
-#ifdef _WIN32
-    SetConsoleOutputCP(CP_UTF8);
-#endif
+    PatientData patient;
+    SymptomData symptomData;
 
     medicodebanner();
-
-    if (patientconsent())
-    {
-        patientpersonalinfo(patient, symptoms);
-    }
-
-    return 0;
+    generatePatientPDF (patient, symptomData);
+    mainmenu (patient, symptomData);
 }

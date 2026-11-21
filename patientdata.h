@@ -5,6 +5,8 @@
 struct PatientData
 {
     std::string patientID;
+    std::string patient;
+    std::string symptom; 
     std::string name;
     std::string age;
     std::string sex;

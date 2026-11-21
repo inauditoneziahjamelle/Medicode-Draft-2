@@ -194,8 +194,3 @@ void healthcarefacility()
     cout << "Dialing the Doctor..." << endl;
     cout << endl;
 }
-int main()
-{
-    healthcarefacility();
-    return 0;
-}

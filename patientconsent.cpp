@@ -11,15 +11,13 @@ void patientconsent()
 
     cout << endl;
     cout << "===============================================================" << endl;
-    cout << "                      \033[1mPATIENT CONSENT\033[0m" << endl;
+    cout << "||                    \033[1mPATIENT CONSENT\033[0m                        ||" << endl; 
     cout << "===============================================================" << endl;
-
-    cout << "\033[3m";
-    cout << "       By using MEDICODE, your personal and medical" << endl;
-    cout << "       information will becollected to help provide " << endl;
-    cout << "       healthcare navigation and connect you with a GP." << endl << endl;
-    cout << "\033[0m";
-
+    cout << "||                                                           ||" << endl;
+    cout << "||     \033[3mBy using MEDICODE, your personal and medical\033[0m          ||" << endl;
+    cout << "||     \033[3minformation will becollected to help provide\033[0m          ||" << endl;
+    cout << "||     \033[3mhealthcare navigation and connect you with a GP.\033[0m      ||" << endl;
+    cout << "||                                                           ||" << endl;
     cout << "===============================================================" << endl;
     cout << "1. Agree" << endl;
     cout << "2. Disagree" << endl;
@@ -27,6 +25,7 @@ void patientconsent()
     cout << endl;
     cout << "Enter your choice: ";
     cin >> choice;
+    cout << endl;
 
     cout << "===============================================================" << endl;
 

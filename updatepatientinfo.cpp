@@ -44,9 +44,9 @@ void updatePatientInformation(PatientData &patient)
                 break;
 
             case 3:
-                cout << "Current Sex: " << patient.sex << endl;
+                cout << "Current Sex: " << patient.sexChoice << endl;
                 cout << "Enter New Sex: ";
-                getline(cin, patient.sex);
+                getline(cin, patient.sexChoice);
                 break;
 
             case 4:
@@ -71,7 +71,7 @@ void updatePatientInformation(PatientData &patient)
                 getline(cin, patient.age);
 
                 cout << "Sex: ";
-                getline(cin, patient.sex);
+                getline(cin, patient.sexChoice);
 
                 cout << "Address: ";
                 getline(cin, patient.address);

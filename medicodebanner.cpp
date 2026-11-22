@@ -3,12 +3,13 @@
 #include <string>
 #include <windows.h>
 #include "patientconsent.h"
+#include "patientdata.h"
 #include "exitprogram.h"
 
 using namespace std;
 
 
-void medicodebanner()
+void medicodebanner(PatientData &patient)
 {
 
 
@@ -70,7 +71,7 @@ cout << "\033[0m";
         if (choice == 1)
         {
             cout << "Proceeding to Patient Consent Form..." << endl;
-            patientconsent();
+            patientconsent(patient);
         }
         else if (choice == 2)
         {

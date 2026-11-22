@@ -1,3 +1,4 @@
 #pragma once
+#include "patientdata.h"
 
-void patientconsent();
+void patientconsent(PatientData &patient);

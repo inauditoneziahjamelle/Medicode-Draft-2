@@ -9,7 +9,7 @@ struct PatientData
     std::string symptom; 
     std::string name;
     std::string age;
-    std::string sex;
+    std::string sexChoice;
     std::string address;
     std::string civilStatus;
 

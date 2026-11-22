@@ -1,3 +1,4 @@
-#pragma one
+#pragma once
+#include "patientdata.h"
 
-void medicodebanner();
+void medicodebanner(PatientData &patient);

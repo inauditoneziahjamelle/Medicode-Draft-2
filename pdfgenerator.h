@@ -4,7 +4,7 @@
 #include "patientdata.h"
 #include "symptomdata.h"
 
-void generatePatientPDF(const PatientData &patient,
+void generatepatientpdf(const PatientData &patient,
                         const SymptomData &symptomData);
 
 #endif

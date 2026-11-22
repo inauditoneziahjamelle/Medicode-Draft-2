@@ -56,7 +56,7 @@ void patientprofile(PatientData &patient, SymptomData &symptomData)
         
         case 3: //prinr user profile
         {
-            generatePatientPDF (patient, symptomData);
+            generatepatientpdf(patient, symptomData);
             break;
         }
 

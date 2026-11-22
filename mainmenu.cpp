@@ -4,6 +4,8 @@
 #include "patientpersonalinfo.h"
 #include "exitprogram.h"
 #include "patientprofile.h"
+#include "hc.h"
+
 
 using namespace std;
 
@@ -19,7 +21,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
         cout << "==============================================================" << endl;
         cout << "||                   1. REQUEST A DOCTOR                    ||" << endl;
         cout << "||                   2. PATIENT PROFILE                     ||" << endl;
-        cout << "||                   3. EXIT                                ||" << endl;
+        cout << "||                   4. EXIT                                ||" << endl;
         cout << "==============================================================" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
@@ -29,7 +31,8 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
         {
             case 1:
             {
-               generalquestions(symptoms);
+               generalquestions(patient,symptoms);
+               healthcare(patient,symptoms);
                 break;
             }
 

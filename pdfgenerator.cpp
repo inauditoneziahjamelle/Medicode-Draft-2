@@ -4,13 +4,13 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
+#include "patientdata.h"
 #include "pdfgenerator.h"
 #include "PDFgen/pdfgen.h"
 
 using namespace std;
 
-void generatePatientPDF(const PatientData &patient,
+void generatepatientpdf(const PatientData &patient,
                         const SymptomData &symptomData)
 {
     const double PAGE_TOP = 790.0;
@@ -73,7 +73,7 @@ void generatePatientPDF(const PatientData &patient,
     entries.push_back({"Patient ID", patient.patientID, 10, 2});
     entries.push_back({"Name", patient.name, 10, 2});
     entries.push_back({"Age", patient.age, 10, 2});
-    entries.push_back({"Sex", patient.sex, 10, 2});
+    entries.push_back({"Sex", patient.sexChoice, 10, 2});
     entries.push_back({"Address", patient.address, 10, 2});
     entries.push_back({"Civil Status", patient.civilStatus, 10, 2});
 
@@ -127,7 +127,7 @@ void generatePatientPDF(const PatientData &patient,
     // OB-GYNE HISTORY
     // ==========================================
 
-    if (patient.sex == "Female")
+    if (patient.sexChoice == "Female")
     {
         entries.push_back({"OB-GYNE HISTORY", "", 14, 1});
 

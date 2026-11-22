@@ -2,10 +2,11 @@
 #include "patientconsent.h"
 #include "exitprogram.h"
 #include "patientpersonalinfo.h"
+#include "patientdata.h" 
 
 using namespace std;
 
-void patientconsent()
+void patientconsent(PatientData &patient)
 {
     int choice;
 
@@ -14,8 +15,8 @@ void patientconsent()
     cout << "||                    \033[1mPATIENT CONSENT\033[0m                        ||" << endl; 
     cout << "===============================================================" << endl;
     cout << "||                                                           ||" << endl;
-    cout << "||     \033[3mBy using MEDICODE, your personal and medical\033[0m          ||" << endl;
-    cout << "||     \033[3minformation will becollected to help provide\033[0m          ||" << endl;
+    cout << "||      \033[3mBy using MEDICODE, your personal and medical\033[0m         ||" << endl;
+    cout << "||     \033[3minformation will be collected to help provide\033[0m         ||" << endl;
     cout << "||     \033[3mhealthcare navigation and connect you with a GP.\033[0m      ||" << endl;
     cout << "||                                                           ||" << endl;
     cout << "===============================================================" << endl;
@@ -32,7 +33,7 @@ void patientconsent()
     if (choice == 1)
     {
         cout << "Please input here your personal information." << endl;
-        patientpersonalinfo ();
+        patientpersonalinfo (patient);
         return; 
     }
     
@@ -45,6 +46,6 @@ void patientconsent()
     else
     {
         cout << "Invalid choice. Please choose either 1 or 2." << endl;
-        patientconsent();
+        patientconsent(patient);
     }
 }

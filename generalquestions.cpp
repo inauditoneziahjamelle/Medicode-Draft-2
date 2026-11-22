@@ -4,10 +4,15 @@
 #include <limits>
 #include "generalquestions.h"
 #include "healthcarefacility.h"
+#include "patientdata.h"
+#include "symptomdata.h"
+#include "mainmenu.h"
+#include "exitprogram.h"
+#include "hc.h"
 
 using namespace std;
 
-bool genquesnum1(SymptomData &symptomData)
+bool genquesnum1(PatientData &patient,SymptomData &symptomData)
 {
     int choice;
 
@@ -42,7 +47,7 @@ bool genquesnum1(SymptomData &symptomData)
     }
     else if (choice == 5)
     {
-        cout << "main menu\n";
+        mainmenu(patient,symptomData);
         return false;
     }
     else
@@ -52,7 +57,7 @@ bool genquesnum1(SymptomData &symptomData)
     }
 }
 
-bool genquesnum2(SymptomData &symptomData)
+bool genquesnum2(PatientData &patient,SymptomData &symptomData)
 {
     int choice;
 
@@ -82,22 +87,22 @@ bool genquesnum2(SymptomData &symptomData)
     }
     else if (choice == 4)
     {
-        if (!genquesnum1(symptomData))
+        if (!genquesnum1(patient,symptomData))
         {
             return false;
         }
-        return genquesnum2(symptomData);
+        return genquesnum2(patient,symptomData);
     }
     else if (choice == 5)
     {
-        cout << "main menu\n";
+        mainmenu(patient,symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum3(SymptomData &symptomData)
+bool genquesnum3(PatientData &patient,SymptomData &symptomData)
 {
     int choice;
 
@@ -133,22 +138,22 @@ bool genquesnum3(SymptomData &symptomData)
     }
     else if (choice == 5)
     {
-        if (!genquesnum2(symptomData))
+        if (!genquesnum2(patient,symptomData))
         {
             return false;
         }
-        return genquesnum3(symptomData);
+        return genquesnum3(patient,symptomData);
     }
     else if (choice == 6)
     {
-        cout << "main menu\n";
+        mainmenu(patient,symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum4(SymptomData &symptomData)
+bool genquesnum4(PatientData &patient,SymptomData &symptomData)
 {
     int choice;
 
@@ -184,22 +189,22 @@ bool genquesnum4(SymptomData &symptomData)
     }
     else if (choice == 5)
     {
-        if (!genquesnum3(symptomData))
+        if (!genquesnum3(patient,symptomData))
         {
             return false;
         }
-        return genquesnum4(symptomData);
+        return genquesnum4(patient,symptomData);
     }
     else if (choice == 6)
     {
-        cout << "main menu\n";
+        mainmenu(patient,symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum5(SymptomData &symptomData)
+bool genquesnum5(PatientData &patient,SymptomData &symptomData)
 {
     int choice;
 
@@ -225,22 +230,22 @@ bool genquesnum5(SymptomData &symptomData)
     }
     else if (choice == 3)
     {
-        if (!genquesnum4(symptomData))
+        if (!genquesnum4(patient,symptomData))
         {
             return false;
         }
-        return genquesnum5(symptomData);
+        return genquesnum5(patient,symptomData);
     }
     else if (choice == 4)
     {
-        cout << "main menu\n";
+        mainmenu(patient,symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum6(SymptomData &symptomData)
+bool genquesnum6(PatientData &patient,SymptomData &symptomData)
 {
     int choice;
 
@@ -288,22 +293,22 @@ bool genquesnum6(SymptomData &symptomData)
     }
     else if (choice == 7)
     {
-        if (!genquesnum5(symptomData))
+        if (!genquesnum5(patient,symptomData))
         {
             return false;
         }
-        return genquesnum6(symptomData);
+        return genquesnum6(patient,symptomData);
     }
     else if (choice == 8)
     {
-        cout << "main menu\n";
+        mainmenu(patient,symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum7(SymptomData &symptomData)
+bool genquesnum7(PatientData &patient,SymptomData &symptomData)
 {
     int choice;
 
@@ -333,11 +338,11 @@ bool genquesnum7(SymptomData &symptomData)
     }
     else if (choice == 4)
     {
-        if (!genquesnum6(symptomData))
+        if (!genquesnum6(patient,symptomData))
         {
             return false;
         }
-        return genquesnum7(symptomData);
+        return genquesnum7(patient,symptomData);
     }
     else if (choice == 5)
     {
@@ -370,33 +375,34 @@ void displaySymptomSummary(const SymptomData &symptomData)
     }
 }
 
-bool generalquestions(SymptomData &symptomData)
+
+bool generalquestions(PatientData &patient,SymptomData &symptomData)
 {
-    if (!genquesnum1(symptomData))
+    if (!genquesnum1(patient,symptomData))
     {
         return false;
     }
-    if (!genquesnum2(symptomData))
+    if (!genquesnum2(patient,symptomData))
     {
         return false;
     }
-    if (!genquesnum3(symptomData))
+    if (!genquesnum3(patient,symptomData))
     {
         return false;
     }
-    if (!genquesnum4(symptomData))
+    if (!genquesnum4(patient,symptomData))
     {
         return false;
     }
-    if (!genquesnum5(symptomData))
+    if (!genquesnum5(patient,symptomData))
     {
         return false;
     }
-    if (!genquesnum6(symptomData))
+    if (!genquesnum6(patient,symptomData))
     {
         return false;
     }
-    if (!genquesnum7(symptomData))
+    if (!genquesnum7(patient,symptomData))
     {
         return false;
     }
@@ -412,46 +418,6 @@ bool generalquestions(SymptomData &symptomData)
 
     symptomData.summaryCompleted = true;
 
-    int nextChoice;
+    return true;
 
-    cout << "\n========================================\n";
-    cout << "             NEXT OPTIONS\n";
-    cout << "========================================\n";
-    cout << "1. View Symptom Summary\n";
-    cout << "2. Connect to an Available General Practitioner\n";
-    cout << "3. View General Health Guidance\n";
-    cout << "4. Back to Main Menu\n";
-    cout << "5. Exit\n";
-    cout << "Enter your choice: ";
-    cin >> nextChoice;
-
-    if (nextChoice == 1)
-    {
-        displaySymptomSummary(symptomData);
-        return false;
-    }
-    else if (nextChoice == 2)
-    {
-        cout << "\nConnecting to an Available General Practitioner...\n";
-        healthcarefacility();
-        return false;
-    }
-    else if (nextChoice == 3)
-    {
-        cout << "\nAccessing General Health Guidance...\n";
-        cout << "Health guidance feature is not yet implemented.\n";
-        return false;
-    }
-    else if (nextChoice == 4)
-    {
-        cout << "main menu\n";
-        return false;
-    }
-    else if (nextChoice == 5)
-    {
-        cout << "\nExiting MEDICODE...\n";
-        return true;
-    }
-
-    return false;
 }

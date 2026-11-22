@@ -3,4 +3,4 @@
 #include "patientdata.h"
 #include "symptomdata.h"
 
-void patientpersonalinfo ();
+void patientpersonalinfo(PatientData &patient);

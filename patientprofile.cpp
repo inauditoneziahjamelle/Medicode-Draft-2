@@ -29,12 +29,12 @@ void patientprofile(PatientData &patient, SymptomData &symptomData)
     int choice;
     
     cout << "==============================================================" << endl;
-    cout << "                    PATIENT PROFILE MENU                      " << endl;
+    cout << "||                  PATIENT PROFILE MENU                    ||" << endl;
     cout << "==============================================================" << endl;
-    cout << "              1. Update Personal Information                  " << endl;
-    cout << "              2. View Symptom Summary                         " << endl;
-    cout << "              3. Print User Profile                           " << endl;
-    cout << "              4. Back to Main Menu                            " << endl;
+    cout << "||              1. Update Personal Information              ||" << endl;
+    cout << "||              2. View Symptom Summary                     ||" << endl;
+    cout << "||              3. Print User Profile                       ||" << endl;
+    cout << "||              4. Back to Main Menu                        ||" << endl;
     cout << "==============================================================" << endl;
     cout << endl;
     cout << "Enter your choice: ";
@@ -68,3 +68,4 @@ void patientprofile(PatientData &patient, SymptomData &symptomData)
     }
 
 }
+

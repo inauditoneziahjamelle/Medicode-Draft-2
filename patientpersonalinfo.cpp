@@ -87,7 +87,7 @@ void patientpersonalinfo()
 
     cout << endl;
     cout << "=============================================" << endl;
-    cout << "            PATIENT'S INFORMATION" << endl;
+    cout << "||          PATIENT'S INFORMATION          ||" << endl;
     cout << "=============================================" << endl;
 
     cout << endl;
@@ -605,7 +605,7 @@ void patientpersonalinfo()
     // PATIENT SUMMARY
     cout << endl;
     cout << "=============================================" << endl;
-    cout << "          PATIENT INFORMATION SUMMARY" << endl;
+    cout << "||       PATIENT INFORMATION SUMMARY       ||" << endl;
     cout << "=============================================" << endl;
 
     cout << endl;
@@ -676,6 +676,7 @@ void patientpersonalinfo()
     cout << "=============================================" << endl;
     cout << "1. Proceed" << endl;
     cout << "2. Exit" << endl;
+    cout << endl;
     cout << "Enter choice: ";
     cin >> choice;
 
@@ -699,5 +700,6 @@ void patientpersonalinfo()
         cout << "Invalid choice." << endl;
     }
 }
+        
         
     

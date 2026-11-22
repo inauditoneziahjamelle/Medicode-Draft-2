@@ -40,38 +40,32 @@ cout << "\033[0m";
         cout << "\033[0m";
 
         cout << "===============================================================" << endl;
-        cout << "\033[1m                        DISCLAIMER:\033[0m" << endl;
+        cout << "||                        \033[1mDISCLAIMER:\033[0m                        ||" << endl;
         cout << "===============================================================" << endl;
-        cout << endl; 
-       
-       
-        cout << "\033[3m";
-        cout << "      MEDICODE asks questions about your symptoms and" << endl;
-        cout << "      connects you to available General Practitioners (GPs)" << endl;
-        cout << "      who can provide general health guidance." << endl << endl;
-
-        cout << "      It caters only to Green Triage cases, which are" << endl;
-        cout << "      generally non-emergency conditions that are bearable" << endl;
-        cout << "      and can wait for routine medical assessment." << endl << endl;
-
-        cout << "      A GP may refer you to a Specialized Practitioner" << endl;
-        cout << "      if necessary." << endl << endl;
-
-        cout << "      MEDICODE does not directly diagnose illnesses or" << endl;
-        cout << "      provide Specialized Practitioner consultations." << endl;
-        cout << "\033[0m";
-
-        cout << endl; 
-        cout << "================================================================" << endl;
-        cout << endl; 
-
-        cout << endl;
+        cout << "||                                                           ||" << endl;
+        cout << "||   \033[3mMEDICODE asks questions about your symptoms and\033[0m         ||" << endl;
+        cout << "||   \033[3mconnects you to available General Practitioners (GPs)\033[0m   ||" << endl;
+        cout << "||   \033[3mwho can provide general health guidance.\033[0m                ||" << endl;
+        cout << "||                                                           ||" << endl;
+        cout << "||   \033[3mIt caters only to Green Triage cases, which are\033[0m         ||" << endl;
+        cout << "||   \033[3mgenerally non-emergency conditions that are bearable\033[0m    ||" << endl;
+        cout << "||   \033[3mand can wait for routine medical assessment.\033[0m            ||" << endl;
+        cout << "||                                                           ||" << endl;
+        cout << "||   \033[3mA GP may refer you to a Specialized Practitioner\033[0m        ||" << endl;
+        cout << "||   \033[3mif necessary.\033[0m                                           ||" << endl;
+        cout << "||                                                           ||" << endl;
+        cout << "||   \033[3mMEDICODE does not directly diagnose illnesses or\033[0m        ||" << endl;
+        cout << "||   \033[3mprovide Specialized Practitioner consultations.\033[0m         ||" << endl;
+        cout << "||                                                           ||" << endl;
+        cout << "===============================================================" << endl;
+        
         cout << "1. Proceed" << endl;
         cout << "2. No" << endl;
 
         cout << endl;
         cout << "Enter your choice: ";
         cin >> choice;
+        cout << endl;
 
         if (choice == 1)
         {

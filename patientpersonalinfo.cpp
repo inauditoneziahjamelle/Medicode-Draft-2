@@ -45,9 +45,11 @@ void patientpersonalinfo(PatientData &patient)
     int sexChoice;
     int option;
     int moreChoice;
+    int count;
 
     string tempOthers;
     string entry;
+    string item;
 
     // GENERATE PATIENT ID
     if (patient.patientID.empty())
@@ -111,63 +113,58 @@ void patientpersonalinfo(PatientData &patient)
     cout << endl;
     cout << "II. HISTORY OF PRESENT ILLNESS" << endl;
     cout << "Chief Complaint:" << endl;
-    cout << "1. Fever" << endl;
-    cout << "2. Coughing/Cold" << endl;
-    cout << "3. Pain/Ache" << endl;
-    cout << "4. Dizziness/Fatigue" << endl;
-    cout << "5. Others" << endl;
-    cout << "Enter choice: ";
-    cin >> option;
 
-    if (option == 1)
-    {
-        patient.historyPresentIllness = "Fever";
-    }
-    else if (option == 2)
-    {
-        patient.historyPresentIllness = "Coughing/Cold";
-    }
-    else if (option == 3)
-    {
-        patient.historyPresentIllness = "Pain/Ache";
-    }
-    else if (option == 4)
-    {
-        patient.historyPresentIllness = "Dizziness/Fatigue";
-    }
-    else if (option == 5)
-    {
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    patient.historyPresentIllness.clear();
+    count = 0;
 
-        tempOthers.clear();
+    do
+    {
+        cout << endl;
+        cout << "1. Fever" << endl;
+        cout << "2. Coughing/Cold" << endl;
+        cout << "3. Pain/Ache" << endl;
+        cout << "4. Dizziness/Fatigue" << endl;
+        cout << "5. Others" << endl;
+        cout << "Enter choice: ";
+        cin >> option;
 
-        do
+        item = "";
+
+        if (option == 1)      item = "Fever";
+        else if (option == 2) item = "Coughing/Cold";
+        else if (option == 3) item = "Pain/Ache";
+        else if (option == 4) item = "Dizziness/Fatigue";
+        else if (option == 5)
         {
-            cout << "Please specify: ";
-            getline(cin, entry);
-
-            if (!tempOthers.empty())
-            {
-                tempOthers += ", ";
-            }
-
-            tempOthers += entry;
-
-            cout << endl;
-            cout << "Is that all? (1. Yes, 2. No): ";
-            cin >> moreChoice;
-
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Please specify: ";
+            getline(cin, item);
+        }
 
-        } while (moreChoice == 2);
+        if (!item.empty())
+        {
+            if (count > 0)
+            {
+                patient.historyPresentIllness += "\n";
+            }
+            count++;
+            patient.historyPresentIllness += to_string(count) + ". " + item;
+        }
+        else if (option < 1 || option > 5)
+        {
+            cout << "Invalid choice." << endl;
+        }
 
-        patient.historyPresentIllness = tempOthers;
+        cout << endl;
+        cout << "Add another? (1. Yes, 2. No): ";
+        cin >> moreChoice;
     }
-    else
+    while (moreChoice == 1);
+
+    if (patient.historyPresentIllness.empty())
     {
         patient.historyPresentIllness = "Not Specified";
     }
-
 
     // III. PAST MEDICAL HISTORY
 
@@ -806,4 +803,11 @@ void patientpersonalinfo(PatientData &patient)
     {
         cout << "Invalid choice." << endl;
     }
+}
+
+int main()
+{
+    PatientData patient{};
+    patientpersonalinfo(patient);
+    return 0;
 }

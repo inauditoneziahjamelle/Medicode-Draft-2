@@ -1,22 +1,239 @@
-
+#include <algorithm>
 #include <cstdio>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
-#include "patientdata.h"
+
 #include "pdfgenerator.h"
 #include "PDFgen/pdfgen.h"
 
 using namespace std;
+
+namespace
+{
+    struct RowItem
+    {
+        string label;
+        string value;
+    };
+
+    struct SectionTable
+    {
+        string title;
+        vector<RowItem> rows;
+        string fullWidthNote;
+    };
+
+    vector<string> wrapTextToWidth(const string &text,
+                                   double maxWidth,
+                                   double fontSize)
+    {
+        // Approximate average character width for Helvetica (~0.50 * fontSize)
+        const double avgCharWidth = fontSize * 0.50;
+        const size_t maxChars = max<size_t>(1, static_cast<size_t>(maxWidth / avgCharWidth));
+
+        vector<string> wrappedLines;
+        istringstream input(text);
+        string word;
+        string currentLine;
+
+        while (input >> word)
+        {
+            if (word.length() > maxChars)
+            {
+                if (!currentLine.empty())
+                {
+                    wrappedLines.push_back(currentLine);
+                    currentLine.clear();
+                }
+
+                size_t pos = 0;
+                while (pos < word.length())
+                {
+                    wrappedLines.push_back(word.substr(pos, maxChars));
+                    pos += maxChars;
+                }
+            }
+            else if (currentLine.empty())
+            {
+                currentLine = word;
+            }
+            else if (currentLine.length() + 1 + word.length() <= maxChars)
+            {
+                currentLine += " " + word;
+            }
+            else
+            {
+                wrappedLines.push_back(currentLine);
+                currentLine = word;
+            }
+        }
+
+        if (!currentLine.empty())
+        {
+            wrappedLines.push_back(currentLine);
+        }
+
+        if (wrappedLines.empty())
+        {
+            wrappedLines.push_back("");
+        }
+
+        return wrappedLines;
+    }
+
+    void drawSectionHeader(pdf_doc *pdf,
+                           double &positionY,
+                           double leftX,
+                           double tableWidth,
+                           const string &title)
+    {
+        const double headerHeight = 22.0;
+        const uint32_t headerFill = PDF_RGB(36, 92, 148);
+        const uint32_t borderColor = PDF_RGB(64, 64, 64);
+
+        // PDFgen y coordinates start at the bottom of the rectangle
+        double rectBottomY = positionY - headerHeight;
+
+        pdf_add_filled_rectangle(pdf, NULL, leftX, rectBottomY,
+                                 tableWidth, headerHeight,
+                                 0.8, headerFill, borderColor);
+
+        pdf_add_text(pdf, NULL, title.c_str(), 11.0,
+                     leftX + 8.0, rectBottomY + 7.0, PDF_WHITE);
+
+        positionY = rectBottomY;
+    }
+
+    void drawTableRow(pdf_doc *pdf,
+                      double &positionY,
+                      double pageBottom,
+                      double pageTop,
+                      double leftX,
+                      double labelColWidth,
+                      double valueColWidth,
+                      const string &sectionTitle,
+                      const RowItem &row,
+                      bool alternateShade)
+    {
+        const double fontSize = 10.0;
+        const double lineHeight = 13.0;
+        const double cellPadY = 6.0;
+        const double cellPadX = 7.0;
+        const double tableWidth = labelColWidth + valueColWidth;
+
+        string safeValue = row.value.empty() ? "Not provided" : row.value;
+
+        vector<string> labelLines = wrapTextToWidth(
+            row.label, labelColWidth - (2.0 * cellPadX), fontSize);
+        vector<string> valueLines = wrapTextToWidth(
+            safeValue, valueColWidth - (2.0 * cellPadX), fontSize);
+
+        size_t maxLines = max(labelLines.size(), valueLines.size());
+        double rowHeight = (maxLines * lineHeight) + (2.0 * cellPadY);
+
+        if (positionY - rowHeight < pageBottom)
+        {
+            pdf_append_page(pdf);
+            positionY = pageTop;
+            drawSectionHeader(pdf, positionY, leftX, tableWidth,
+                              sectionTitle + " (Continued)");
+        }
+
+        double rowBottomY = positionY - rowHeight;
+        uint32_t borderColor = PDF_RGB(140, 140, 140);
+
+        if (alternateShade)
+        {
+            uint32_t stripeColor = PDF_RGB(242, 247, 252);
+            pdf_add_filled_rectangle(pdf, NULL, leftX, rowBottomY,
+                                     tableWidth, rowHeight,
+                                     0.0, stripeColor, stripeColor);
+        }
+
+        // Outer box & vertical column divider
+        pdf_add_rectangle(pdf, NULL, leftX, rowBottomY,
+                          tableWidth, rowHeight, 0.6, borderColor);
+        pdf_add_line(pdf, NULL,
+                     leftX + labelColWidth, rowBottomY,
+                     leftX + labelColWidth, positionY,
+                     0.6, borderColor);
+
+        // Label text (top-aligned inside cell)
+        double textY = positionY - cellPadY - fontSize;
+        for (size_t i = 0; i < labelLines.size(); ++i)
+        {
+            pdf_add_text(pdf, NULL, labelLines[i].c_str(), fontSize,
+                         leftX + cellPadX, textY, PDF_BLACK);
+            textY -= lineHeight;
+        }
+
+        // Value text (top-aligned inside cell)
+        textY = positionY - cellPadY - fontSize;
+        for (size_t i = 0; i < valueLines.size(); ++i)
+        {
+            pdf_add_text(pdf, NULL, valueLines[i].c_str(), fontSize,
+                         leftX + labelColWidth + cellPadX, textY, PDF_BLACK);
+            textY -= lineHeight;
+        }
+
+        positionY = rowBottomY;
+    }
+
+    void drawNoteRow(pdf_doc *pdf,
+                     double &positionY,
+                     double pageBottom,
+                     double pageTop,
+                     double leftX,
+                     double tableWidth,
+                     const string &sectionTitle,
+                     const string &note)
+    {
+        const double fontSize = 10.0;
+        const double lineHeight = 13.0;
+        const double cellPadY = 7.0;
+        const double cellPadX = 8.0;
+
+        vector<string> noteLines = wrapTextToWidth(
+            note, tableWidth - (2.0 * cellPadX), fontSize);
+        double rowHeight = (noteLines.size() * lineHeight) + (2.0 * cellPadY);
+
+        if (positionY - rowHeight < pageBottom)
+        {
+            pdf_append_page(pdf);
+            positionY = pageTop;
+            drawSectionHeader(pdf, positionY, leftX, tableWidth,
+                              sectionTitle + " (Continued)");
+        }
+
+        double rowBottomY = positionY - rowHeight;
+        uint32_t borderColor = PDF_RGB(140, 140, 140);
+
+        pdf_add_rectangle(pdf, NULL, leftX, rowBottomY,
+                          tableWidth, rowHeight, 0.6, borderColor);
+
+        double textY = positionY - cellPadY - fontSize;
+        for (size_t i = 0; i < noteLines.size(); ++i)
+        {
+            pdf_add_text(pdf, NULL, noteLines[i].c_str(), fontSize,
+                         leftX + cellPadX, textY, PDF_BLACK);
+            textY -= lineHeight;
+        }
+
+        positionY = rowBottomY;
+    }
+} // namespace
 
 void generatepatientpdf(const PatientData &patient,
                         const SymptomData &symptomData)
 {
     const double PAGE_TOP = 790.0;
     const double PAGE_BOTTOM = 50.0;
-    const double LEFT_MARGIN = 50.0;
-    const size_t MAX_LINE_LENGTH = 88;
+    const double LEFT_MARGIN = 45.0;
+    const double TABLE_WIDTH = PDF_A4_WIDTH - (2.0 * LEFT_MARGIN);
+    const double LABEL_COL_WIDTH = 185.0;
+    const double VALUE_COL_WIDTH = TABLE_WIDTH - LABEL_COL_WIDTH;
 
     struct pdf_info info = {};
     snprintf(info.creator, sizeof(info.creator), "MEDICODE");
@@ -36,208 +253,147 @@ void generatepatientpdf(const PatientData &patient,
     double positionY = PAGE_TOP;
 
     // ==========================================
-    // PDF CONTENT STRUCTURE
+    // TITLE BANNER
     // ==========================================
 
-    struct PDFEntry
-    {
-        string label;
-        string value;
-        double fontSize;
-        int type;
+    pdf_add_text(pdf, NULL, "MEDICODE", 22.0,
+                 LEFT_MARGIN, positionY - 22.0, PDF_BLACK);
+    pdf_add_text(pdf, NULL, "PATIENT SUMMARY", 13.0,
+                 LEFT_MARGIN, positionY - 40.0, PDF_RGB(64, 64, 64));
+    pdf_add_line(pdf, NULL,
+                 LEFT_MARGIN, positionY - 48.0,
+                 LEFT_MARGIN + TABLE_WIDTH, positionY - 48.0,
+                 1.2, PDF_RGB(36, 92, 148));
+
+    positionY -= 62.0;
+
+    // ==========================================
+    // BUILD SECTION TABLES
+    // ==========================================
+
+    vector<SectionTable> sections;
+
+    SectionTable patientInfo;
+    patientInfo.title = "PATIENT INFORMATION";
+    patientInfo.rows = {
+        {"Patient ID", patient.patientID},
+        {"Name", patient.name},
+        {"Age", patient.age},
+        {"Sex", patient.sexChoice},
+        {"Address", patient.address},
+        {"Civil Status", patient.civilStatus}
     };
+    sections.push_back(patientInfo);
 
-    struct PDFLine
-    {
-        string text;
-        double fontSize;
-        double spacing;
+    SectionTable hpi;
+    hpi.title = "HISTORY OF PRESENT ILLNESS";
+    hpi.rows = {
+        {"History of Present Illness", patient.historyPresentIllness}
     };
+    sections.push_back(hpi);
 
-    vector<PDFEntry> entries;
-    vector<PDFLine> lines;
+    SectionTable pmh;
+    pmh.title = "PAST MEDICAL HISTORY";
+    pmh.rows = {
+        {"Operations", patient.operations},
+        {"Immunizations", patient.immunizations},
+        {"Allergies", patient.allergies},
+        {"Hospitalizations", patient.hospitalizations},
+        {"Maintenance Medications", patient.maintenanceMeds},
+        {"Others", patient.othersMedical}
+    };
+    sections.push_back(pmh);
 
-    // ==========================================
-    // MEDICODE TITLE
-    // ==========================================
+    SectionTable familyHistory;
+    familyHistory.title = "FAMILY HISTORY";
+    familyHistory.rows = {
+        {"Bronchial Asthma", patient.bronchialAsthma},
+        {"Diabetes Mellitus", patient.diabetesMellitus},
+        {"Hypertension", patient.hypertension},
+        {"Pulmonary Tuberculosis", patient.pulmonaryTuberculosis},
+        {"Others", patient.othersFamily}
+    };
+    sections.push_back(familyHistory);
 
-    entries.push_back({"MEDICODE", "", 24, 0});
-    entries.push_back({"PATIENT SUMMARY", "", 16, 0});
-
-    // ==========================================
-    // PATIENT INFORMATION
-    // ==========================================
-
-    entries.push_back({"PATIENT INFORMATION", "", 14, 1});
-
-    entries.push_back({"Patient ID", patient.patientID, 10, 2});
-    entries.push_back({"Name", patient.name, 10, 2});
-    entries.push_back({"Age", patient.age, 10, 2});
-    entries.push_back({"Sex", patient.sexChoice, 10, 2});
-    entries.push_back({"Address", patient.address, 10, 2});
-    entries.push_back({"Civil Status", patient.civilStatus, 10, 2});
-
-    // ==========================================
-    // HISTORY OF PRESENT ILLNESS
-    // ==========================================
-
-    entries.push_back({"HISTORY OF PRESENT ILLNESS", "", 14, 1});
-
-    entries.push_back({"History of Present Illness",
-                       patient.historyPresentIllness, 10, 2});
-
-    // ==========================================
-    // PAST MEDICAL HISTORY
-    // ==========================================
-
-    entries.push_back({"PAST MEDICAL HISTORY", "", 14, 1});
-
-    entries.push_back({"Operations", patient.operations, 10, 2});
-    entries.push_back({"Immunizations", patient.immunizations, 10, 2});
-    entries.push_back({"Allergies", patient.allergies, 10, 2});
-    entries.push_back({"Hospitalizations", patient.hospitalizations, 10, 2});
-    entries.push_back({"Maintenance Medications", patient.maintenanceMeds, 10, 2});
-    entries.push_back({"Others", patient.othersMedical, 10, 2});
-
-    // ==========================================
-    // FAMILY HISTORY
-    // ==========================================
-
-    entries.push_back({"FAMILY HISTORY", "", 14, 1});
-
-    entries.push_back({"Bronchial Asthma", patient.bronchialAsthma, 10, 2});
-    entries.push_back({"Diabetes Mellitus", patient.diabetesMellitus, 10, 2});
-    entries.push_back({"Hypertension", patient.hypertension, 10, 2});
-    entries.push_back({"Pulmonary Tuberculosis", patient.pulmonaryTuberculosis, 10, 2});
-    entries.push_back({"Others", patient.othersFamily, 10, 2});
-
-    // ==========================================
-    // SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY
-    // ==========================================
-
-    entries.push_back({"SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY", "", 14, 1});
-
-    entries.push_back({"Smoker", patient.smoker, 10, 2});
-    entries.push_back({"Alcoholic Beverage Drinker",
-                       patient.alcoholicBeverageDrinker, 10, 2});
-    entries.push_back({"Work/Environmental Hazards",
-                       patient.workEnvironmentalHazards, 10, 2});
-
-    // ==========================================
-    // OB-GYNE HISTORY
-    // ==========================================
+    SectionTable socialHistory;
+    socialHistory.title = "SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY";
+    socialHistory.rows = {
+        {"Smoker", patient.smoker},
+        {"Alcoholic Beverage Drinker", patient.alcoholicBeverageDrinker},
+        {"Work/Environmental Hazards", patient.workEnvironmentalHazards}
+    };
+    sections.push_back(socialHistory);
 
     if (patient.sexChoice == "Female")
     {
-        entries.push_back({"OB-GYNE HISTORY", "", 14, 1});
-
-        entries.push_back({"Menarche", patient.menarche, 10, 2});
-        entries.push_back({"Menstrual History", patient.menstrualHistory, 10, 2});
-        entries.push_back({"Gravida", patient.gravida, 10, 2});
-        entries.push_back({"Para", patient.para, 10, 2});
-        entries.push_back({"Last Menstrual Period",
-                           patient.lastMenstrualPeriod, 10, 2});
-        entries.push_back({"Menopause", patient.menopause, 10, 2});
-        entries.push_back({"Others", patient.othersOBGyne, 10, 2});
+        SectionTable obGyne;
+        obGyne.title = "OB-GYNE HISTORY";
+        obGyne.rows = {
+            {"Menarche", patient.menarche},
+            {"Menstrual History", patient.menstrualHistory},
+            {"Gravida", patient.gravida},
+            {"Para", patient.para},
+            {"Last Menstrual Period", patient.lastMenstrualPeriod},
+            {"Menopause", patient.menopause},
+            {"Others", patient.othersOBGyne}
+        };
+        sections.push_back(obGyne);
     }
 
-    // ==========================================
-    // SYMPTOM SUMMARY
-    // ==========================================
-
-    entries.push_back({"SYMPTOM SUMMARY", "", 14, 1});
-
+    SectionTable symptomSection;
+    symptomSection.title = "SYMPTOM SUMMARY";
     if (symptomData.summaryCompleted)
     {
-        entries.push_back({"Duration", symptomData.duration, 10, 2});
-        entries.push_back({"Severity", symptomData.severity, 10, 2});
-        entries.push_back({"Impact on Activities", symptomData.impact, 10, 2});
-        entries.push_back({"Progression", symptomData.progression, 10, 2});
-        entries.push_back({"Other Symptoms", symptomData.symptoms, 10, 2});
-        entries.push_back({"Warning Signs", symptomData.warningSigns, 10, 2});
-        entries.push_back({"Medication/Treatment", symptomData.medications, 10, 2});
+        symptomSection.rows = {
+            {"Duration", symptomData.duration},
+            {"Severity", symptomData.severity},
+            {"Impact on Activities", symptomData.impact},
+            {"Progression", symptomData.progression},
+            {"Other Symptoms", symptomData.symptoms},
+            {"Warning Signs", symptomData.warningSigns},
+            {"Medication/Treatment", symptomData.medications}
+        };
     }
     else
     {
-        entries.push_back({"No symptom questionnaire has been completed.",
-                           "", 10, 0});
+        symptomSection.fullWidthNote = "No symptom questionnaire has been completed.";
     }
+    sections.push_back(symptomSection);
 
     // ==========================================
-    // FORMAT PDF CONTENT
+    // RENDER TABLES TO PDF
     // ==========================================
 
-    for (size_t i = 0; i < entries.size(); ++i)
+    for (size_t s = 0; s < sections.size(); ++s)
     {
-        if (entries[i].type == 0)
-        {
-            lines.push_back({entries[i].label, entries[i].fontSize, 0});
-        }
-        else if (entries[i].type == 1)
-        {
-            lines.push_back({entries[i].label, 14, 4});
-
-            lines.push_back({
-                "------------------------------------------------------------",
-                8,
-                0
-            });
-        }
-        else if (entries[i].type == 2)
-        {
-            string value = entries[i].value.empty()
-                           ? "Not provided"
-                           : entries[i].value;
-
-            string fullText = entries[i].label + ": " + value;
-
-            istringstream input(fullText);
-            string word;
-            string line;
-
-            while (input >> word)
-            {
-                if (line.empty())
-                {
-                    line = word;
-                }
-                else if (line.length() + 1 + word.length() <= MAX_LINE_LENGTH)
-                {
-                    line += " " + word;
-                }
-                else
-                {
-                    lines.push_back({line, 10, 0});
-                    line = word;
-                }
-            }
-
-            if (!line.empty())
-            {
-                lines.push_back({line, 10, 0});
-            }
-        }
-    }
-
-    // ==========================================
-    // ADD CONTENT TO PDF
-    // ==========================================
-
-    for (size_t i = 0; i < lines.size(); ++i)
-    {
-        positionY -= lines[i].spacing;
-
-        if (positionY < PAGE_BOTTOM + 20)
+        // Keep header attached to at least one row when possible
+        if (positionY - 46.0 < PAGE_BOTTOM)
         {
             pdf_append_page(pdf);
             positionY = PAGE_TOP;
         }
 
-        pdf_add_text(pdf, NULL, lines[i].text.c_str(),
-                     lines[i].fontSize,
-                     LEFT_MARGIN, positionY, PDF_BLACK);
+        drawSectionHeader(pdf, positionY, LEFT_MARGIN, TABLE_WIDTH,
+                          sections[s].title);
 
-        positionY -= lines[i].fontSize + 7;
+        if (!sections[s].fullWidthNote.empty())
+        {
+            drawNoteRow(pdf, positionY, PAGE_BOTTOM, PAGE_TOP,
+                        LEFT_MARGIN, TABLE_WIDTH,
+                        sections[s].title, sections[s].fullWidthNote);
+        }
+        else
+        {
+            for (size_t r = 0; r < sections[s].rows.size(); ++r)
+            {
+                drawTableRow(pdf, positionY, PAGE_BOTTOM, PAGE_TOP,
+                             LEFT_MARGIN, LABEL_COL_WIDTH, VALUE_COL_WIDTH,
+                             sections[s].title, sections[s].rows[r],
+                             (r % 2 == 1));
+            }
+        }
+
+        positionY -= 14.0;
     }
 
     // ==========================================

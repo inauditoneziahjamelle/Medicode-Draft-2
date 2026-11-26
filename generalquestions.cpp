@@ -27,7 +27,7 @@ bool genquesnum1(PatientData &patient,SymptomData &symptomData)
 
     if (choice == 1)
     {
-        symptomData.duration = "Today";
+        symptomData.duration = "Today";     
         return true;
     }
     else if (choice == 2)

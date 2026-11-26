@@ -804,10 +804,3 @@ void patientpersonalinfo(PatientData &patient)
         cout << "Invalid choice." << endl;
     }
 }
-
-int main()
-{
-    PatientData patient{};
-    patientpersonalinfo(patient);
-    return 0;
-}

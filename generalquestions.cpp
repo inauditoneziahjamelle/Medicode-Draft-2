@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <limits>
@@ -12,7 +11,7 @@
 
 using namespace std;
 
-bool genquesnum1(PatientData &patient,SymptomData &symptomData)
+bool genquesnum1(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -23,11 +22,11 @@ bool genquesnum1(PatientData &patient,SymptomData &symptomData)
     cout << "4. Not Sure\n";
     cout << "5. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readChoice(1, 5); 
 
     if (choice == 1)
     {
-        symptomData.duration = "Today";     
+        symptomData.duration = "Today";
         return true;
     }
     else if (choice == 2)
@@ -47,7 +46,7 @@ bool genquesnum1(PatientData &patient,SymptomData &symptomData)
     }
     else if (choice == 5)
     {
-        mainmenu(patient,symptomData);
+        mainmenu(patient, symptomData);
         return false;
     }
     else
@@ -57,7 +56,7 @@ bool genquesnum1(PatientData &patient,SymptomData &symptomData)
     }
 }
 
-bool genquesnum2(PatientData &patient,SymptomData &symptomData)
+bool genquesnum2(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -68,7 +67,7 @@ bool genquesnum2(PatientData &patient,SymptomData &symptomData)
     cout << "4. Back to Previous Question\n";
     cout << "5. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readChoice(1, 5); 
 
     if (choice == 1)
     {
@@ -87,22 +86,22 @@ bool genquesnum2(PatientData &patient,SymptomData &symptomData)
     }
     else if (choice == 4)
     {
-        if (!genquesnum1(patient,symptomData))
+        if (!genquesnum1(patient, symptomData))
         {
             return false;
         }
-        return genquesnum2(patient,symptomData);
+        return genquesnum2(patient, symptomData);
     }
     else if (choice == 5)
     {
-        mainmenu(patient,symptomData);
+        mainmenu(patient, symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum3(PatientData &patient,SymptomData &symptomData)
+bool genquesnum3(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -114,7 +113,7 @@ bool genquesnum3(PatientData &patient,SymptomData &symptomData)
     cout << "5. Back to Previous Question\n";
     cout << "6. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readChoice(1, 6); 
 
     if (choice == 1)
     {
@@ -138,22 +137,22 @@ bool genquesnum3(PatientData &patient,SymptomData &symptomData)
     }
     else if (choice == 5)
     {
-        if (!genquesnum2(patient,symptomData))
+        if (!genquesnum2(patient, symptomData))
         {
             return false;
         }
-        return genquesnum3(patient,symptomData);
+        return genquesnum3(patient, symptomData);
     }
     else if (choice == 6)
     {
-        mainmenu(patient,symptomData);
+        mainmenu(patient, symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum4(PatientData &patient,SymptomData &symptomData)
+bool genquesnum4(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -165,7 +164,7 @@ bool genquesnum4(PatientData &patient,SymptomData &symptomData)
     cout << "5. Back to Previous Question\n";
     cout << "6. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readChoice(1, 6); 
 
     if (choice == 1)
     {
@@ -189,22 +188,22 @@ bool genquesnum4(PatientData &patient,SymptomData &symptomData)
     }
     else if (choice == 5)
     {
-        if (!genquesnum3(patient,symptomData))
+        if (!genquesnum3(patient, symptomData))
         {
             return false;
         }
-        return genquesnum4(patient,symptomData);
+        return genquesnum4(patient, symptomData);
     }
     else if (choice == 6)
     {
-        mainmenu(patient,symptomData);
+        mainmenu(patient, symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum5(PatientData &patient,SymptomData &symptomData)
+bool genquesnum5(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -214,13 +213,12 @@ bool genquesnum5(PatientData &patient,SymptomData &symptomData)
     cout << "3. Back to Previous Question\n";
     cout << "4. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readChoice(1, 4); 
 
     if (choice == 1)
     {
         cout << "Please describe your other symptoms in a sentence: ";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        getline(cin, symptomData.symptoms);
+        getline(cin, symptomData.symptoms); 
         return true;
     }
     else if (choice == 2)
@@ -230,22 +228,22 @@ bool genquesnum5(PatientData &patient,SymptomData &symptomData)
     }
     else if (choice == 3)
     {
-        if (!genquesnum4(patient,symptomData))
+        if (!genquesnum4(patient, symptomData))
         {
             return false;
         }
-        return genquesnum5(patient,symptomData);
+        return genquesnum5(patient, symptomData);
     }
     else if (choice == 4)
     {
-        mainmenu(patient,symptomData);
+        mainmenu(patient, symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum6(PatientData &patient,SymptomData &symptomData)
+bool genquesnum6(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -259,7 +257,7 @@ bool genquesnum6(PatientData &patient,SymptomData &symptomData)
     cout << "7. Back to Previous Question\n";
     cout << "8. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readChoice(1, 8); 
 
     if (choice == 1)
     {
@@ -293,22 +291,22 @@ bool genquesnum6(PatientData &patient,SymptomData &symptomData)
     }
     else if (choice == 7)
     {
-        if (!genquesnum5(patient,symptomData))
+        if (!genquesnum5(patient, symptomData))
         {
             return false;
         }
-        return genquesnum6(patient,symptomData);
+        return genquesnum6(patient, symptomData);
     }
     else if (choice == 8)
     {
-        mainmenu(patient,symptomData);
+        mainmenu(patient, symptomData);
         return false;
     }
 
     return true;
 }
 
-bool genquesnum7(PatientData &patient,SymptomData &symptomData)
+bool genquesnum7(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -319,7 +317,7 @@ bool genquesnum7(PatientData &patient,SymptomData &symptomData)
     cout << "4. Back to Previous Question\n";
     cout << "5. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readChoice(1, 5); 
 
     if (choice == 1)
     {
@@ -338,11 +336,11 @@ bool genquesnum7(PatientData &patient,SymptomData &symptomData)
     }
     else if (choice == 4)
     {
-        if (!genquesnum6(patient,symptomData))
+        if (!genquesnum6(patient, symptomData))
         {
             return false;
         }
-        return genquesnum7(patient,symptomData);
+        return genquesnum7(patient, symptomData);
     }
     else if (choice == 5)
     {
@@ -373,38 +371,35 @@ void displaySymptomSummary(const SymptomData &symptomData)
         cout << "Seek immediate professional medical assistance.\n";
         cout << "Do not wait for an automated consultation.\n";
     }
-   
 }
 
-
-
-bool generalquestions(PatientData &patient,SymptomData &symptomData)
+bool generalquestions(PatientData &patient, SymptomData &symptomData)
 {
-    if (!genquesnum1(patient,symptomData))
+    if (!genquesnum1(patient, symptomData))
     {
         return false;
     }
-    if (!genquesnum2(patient,symptomData))
+    if (!genquesnum2(patient, symptomData))
     {
         return false;
     }
-    if (!genquesnum3(patient,symptomData))
+    if (!genquesnum3(patient, symptomData))
     {
         return false;
     }
-    if (!genquesnum4(patient,symptomData))
+    if (!genquesnum4(patient, symptomData))
     {
         return false;
     }
-    if (!genquesnum5(patient,symptomData))
+    if (!genquesnum5(patient, symptomData))
     {
         return false;
     }
-    if (!genquesnum6(patient,symptomData))
+    if (!genquesnum6(patient, symptomData))
     {
         return false;
     }
-    if (!genquesnum7(patient,symptomData))
+    if (!genquesnum7(patient, symptomData))
     {
         return false;
     }
@@ -421,5 +416,4 @@ bool generalquestions(PatientData &patient,SymptomData &symptomData)
     symptomData.summaryCompleted = true;
 
     return true;
-
 }

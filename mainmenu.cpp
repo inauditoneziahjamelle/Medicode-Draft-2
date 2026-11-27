@@ -6,8 +6,13 @@
 #include "patientpersonalinfo.h"
 #include "exitprogram.h"
 #include "patientprofile.h"
+<<<<<<< HEAD
 #include "healthcare.h"
 
+=======
+#include "hc.h"
+#include <limits>
+>>>>>>> bd4c46da934dd05823159f4510c32cdb2a9e4487
 
 using namespace std;
 
@@ -26,6 +31,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
         cout << "||                   3. EXIT                                ||" << endl;
         cout << "==============================================================" << endl;
         cout << "Enter your choice: ";
+<<<<<<< HEAD
 
         if (!(cin >> choice))
         {
@@ -36,6 +42,9 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
             continue;
         }
 
+=======
+        cin >> choice;
+>>>>>>> bd4c46da934dd05823159f4510c32cdb2a9e4487
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (choice)

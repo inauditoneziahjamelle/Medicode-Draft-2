@@ -19,15 +19,15 @@ void healthcarefacility()
     string day;
 
     cout << endl;
-    cout << "\033[31m===================================\033[0m" << endl;
-    cout << "\033[31m||\033[0m  CHOOSE A HEALTHCARE FACILITY \033[31m||\033[0m" << endl;
-    cout << "\033[31m===================================\033[0m" << endl;
-    cout << "||      1. Public Hospital       ||" << endl;
-    cout << "||      2. Private Hospital      ||" << endl;
-    cout << "||      3. Back to Main Menu    ||" << endl;
-    cout << "||      4. Exit                 ||" << endl;
-    cout << "\033[31m===================================\033[0m" << endl;
-    cout << "Enter your choice: ";
+    cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                   CHOOSE A HEALTHCARE FACILITY             \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m               [ 1 ] Public Hospital                       \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m               [ 2 ] Private Hospital                      \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m               [ 3 ] Back to Main Menu                     \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m               [ 4 ] Exit                                  \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+    cout << "                                                                                                   Enter your choice: ";
     cin >> facilityChoice;
 
 
@@ -36,14 +36,14 @@ void healthcarefacility()
     if (facilityChoice == 1)
     {
         cout << endl;
-        cout << "\033[31m===================================\033[0m" << endl;
-        cout << "\033[31m||\033[0m  AVAILABLE PUBLIC DOCTORS     \033[31m||\033[0m" << endl;
-        cout << "\033[31m===================================\033[0m" << endl;
-        cout << "||    1. Dr. Adrian Villanueva   ||" << endl;
-        cout << "||    2. Dr. Marcus Javier       ||" << endl;
-        cout << "||    3. Dr. Nathaniel Cruz     ||" << endl;
-        cout << "\033[31m===================================\033[0m" << endl;
-        cout << "Select Doctor: ";
+        cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m               AVAILABLE PUBLIC DOCTORS                    \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m              [ 1 ] Dr. Adrian Villanueva                   \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m              [ 2 ] Dr. Marcus Javier                       \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m              [ 3 ] Dr. Nathaniel Cruz                      \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+        cout << "                                                                                                   Select Doctor: ";
         cin >> doctorChoice;
 
         switch (doctorChoice)
@@ -92,14 +92,14 @@ void healthcarefacility()
     else if (facilityChoice == 2)
     {
         cout << endl;
-        cout << "\033[31m===================================\033[0m" << endl;
-        cout << "\033[31m||\033[0m  AVAILABLE PRIVATE DOCTORS    \033[31m||\033[0m" << endl;
-        cout << "\033[31m===================================\033[0m" << endl;
-        cout << "||    1. Dr. Daniel Santiago     ||" << endl;
-        cout << "||    2. Dr. Matthew Alcantara   ||" << endl;
-        cout << "||    3. Dr. Gabriel Mendoza     ||" << endl;
-        cout << "\033[31m===================================\033[0m" << endl;
-        cout << "Select Doctor: ";
+       cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                AVAILABLE PRIVATE DOCTORS             \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 1 ] Dr. Daniel Santiagp                   \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 2 ] Dr. Matthew Alcantara                  \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 3 ] Dr. Gabriel Mendoza                 \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+        cout << "                                                                                                           Select Doctor: ";
         cin >> doctorChoice;
 
         switch (doctorChoice)

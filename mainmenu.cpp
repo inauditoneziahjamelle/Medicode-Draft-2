@@ -5,7 +5,7 @@
 #include "exitprogram.h"
 #include "patientprofile.h"
 #include "hc.h"
-
+#include <limits>
 
 using namespace std;
 
@@ -25,7 +25,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
         cout << "==============================================================" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
-        
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (choice)
         {

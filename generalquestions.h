@@ -4,3 +4,4 @@
 
 bool generalquestions(PatientData &patient,SymptomData &symptomData);
 void displaySymptomSummary(const SymptomData &symptomData);
+int readChoice(int minimum, int maximum);

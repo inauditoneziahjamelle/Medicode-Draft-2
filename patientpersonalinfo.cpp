@@ -701,21 +701,20 @@ void patientpersonalinfo(PatientData &patient)
     // PATIENT SUMMARY
 
     cout << endl;
-    cout << "=============================================" << endl;
-    cout << "||       PATIENT INFORMATION SUMMARY       ||" << endl;
-    cout << "=============================================" << endl;
+    cout << "                                                                           +=============================================================+" << endl;
+    cout << "                                                                           ||                PATIENT INFORMATION SUMMARY                ||" << endl;
+    cout << "                                                                           +=============================================================+" << endl;
 
-    cout << endl;
-    cout << "Patient ID: " << patient.patientID << endl;
+    cout << "                                                                           ||                  Patient ID: " << patient.patientID << "             ||" << endl;
 
 
-    cout << endl;
-    cout << "I. GENERAL DATA" << endl;
-    cout << "Name: " << patient.name << endl;
-    cout << "Age: " << patient.age << endl;
-    cout << "Sex: " << patient.sexChoice << endl;
-    cout << "Address: " << patient.address << endl;
-    cout << "Civil Status: " << patient.civilStatus << endl;
+    cout << "                                                                           ||                                                           ||" << endl;
+    cout << "                                                                           || I. GENERAL DATA                                           ||" << endl;
+    cout << "                                                                           || Name: " << patient.name << "                              ||" << endl;
+    cout << "                                                                           || Age: " << patient.age << "                                ||" << endl;
+    cout << "                                                                           || Sex: " << patient.sexChoice << "                          ||" << endl;
+    cout << "                                                                           || Address: " << patient.address << "                        ||" << endl;
+    cout << "                                                                           || Civil Status: " << patient.civilStatus << "               ||" << endl;
 
 
     cout << endl;

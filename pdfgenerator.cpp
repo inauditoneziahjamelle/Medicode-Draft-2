@@ -351,7 +351,8 @@ void generatepatientpdf(const PatientData &patient,
             {"Progression", symptomData.progression},
             {"Other Symptoms", symptomData.symptoms},
             {"Warning Signs", symptomData.warningSigns},
-            {"Medication/Treatment", symptomData.medications}
+            {"Medication/Treatment", symptomData.medications},
+            {"Additional Notes", symptomData.additionalNotes}
         };
     }
     else

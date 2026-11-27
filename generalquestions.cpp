@@ -11,6 +11,8 @@
 
 using namespace std;
 
+int readChoice(int minimum, int maximum);
+
 bool genquesnum1(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -22,7 +24,7 @@ bool genquesnum1(PatientData &patient, SymptomData &symptomData)
     cout << "4. Not Sure\n";
     cout << "5. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    choice = readChoice(1, 5); 
+    choice = readChoice(1, 5);
 
     if (choice == 1)
     {
@@ -67,7 +69,7 @@ bool genquesnum2(PatientData &patient, SymptomData &symptomData)
     cout << "4. Back to Previous Question\n";
     cout << "5. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    choice = readChoice(1, 5); 
+    choice = readChoice(1, 5);
 
     if (choice == 1)
     {
@@ -113,7 +115,7 @@ bool genquesnum3(PatientData &patient, SymptomData &symptomData)
     cout << "5. Back to Previous Question\n";
     cout << "6. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    choice = readChoice(1, 6); 
+    choice = readChoice(1, 6);
 
     if (choice == 1)
     {
@@ -164,7 +166,7 @@ bool genquesnum4(PatientData &patient, SymptomData &symptomData)
     cout << "5. Back to Previous Question\n";
     cout << "6. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    choice = readChoice(1, 6); 
+    choice = readChoice(1, 6);
 
     if (choice == 1)
     {
@@ -213,12 +215,12 @@ bool genquesnum5(PatientData &patient, SymptomData &symptomData)
     cout << "3. Back to Previous Question\n";
     cout << "4. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    choice = readChoice(1, 4); 
+    choice = readChoice(1, 4);
 
     if (choice == 1)
     {
         cout << "Please describe your other symptoms in a sentence: ";
-        getline(cin, symptomData.symptoms); 
+        getline(cin, symptomData.symptoms);
         return true;
     }
     else if (choice == 2)
@@ -246,64 +248,97 @@ bool genquesnum5(PatientData &patient, SymptomData &symptomData)
 bool genquesnum6(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
+    string selectedSigns = ""; // Reset selection list each time Question 6 starts
 
-    cout << "\nAre you experiencing any urgent warning signs?\n";
-    cout << "1. Difficulty breathing\n";
-    cout << "2. Chest pain or pressure\n";
-    cout << "3. Fainting or sudden confusion\n";
-    cout << "4. Severe allergic reaction\n";
-    cout << "5. Feeling unsafe or needing immediate mental health support\n";
-    cout << "6. None of These\n";
-    cout << "7. Back to Previous Question\n";
-    cout << "8. Back to Main Menu\n";
-    cout << "Enter your choice: ";
-    choice = readChoice(1, 8); 
+    while (true)
+    {
+        cout << "\nAre you experiencing any urgent warning signs?\n";
+        cout << "1. Difficulty breathing\n";
+        cout << "2. Chest pain or pressure\n";
+        cout << "3. Fainting or sudden confusion\n";
+        cout << "4. Severe allergic reaction\n";
+        cout << "5. Feeling unsafe or needing immediate mental health support\n";
+        cout << "6. None of These\n";
+        cout << "7. Back to Previous Question\n";
+        cout << "8. Back to Main Menu\n";
+        cout << "Enter your choice: ";
+        choice = readChoice(1, 8);
 
-    if (choice == 1)
-    {
-        symptomData.warningSigns = "Difficulty breathing";
-        return true;
-    }
-    else if (choice == 2)
-    {
-        symptomData.warningSigns = "Chest pain or pressure";
-        return true;
-    }
-    else if (choice == 3)
-    {
-        symptomData.warningSigns = "Fainting or sudden confusion";
-        return true;
-    }
-    else if (choice == 4)
-    {
-        symptomData.warningSigns = "Severe allergic reaction";
-        return true;
-    }
-    else if (choice == 5)
-    {
-        symptomData.warningSigns = "Feeling unsafe or needing immediate mental health support";
-        return true;
-    }
-    else if (choice == 6)
-    {
-        symptomData.warningSigns = "None of These";
-        return true;
-    }
-    else if (choice == 7)
-    {
-        if (!genquesnum5(patient, symptomData))
+        if (choice >= 1 && choice <= 5)
         {
+            string sign;
+            if (choice == 1)
+            {
+                sign = "Difficulty breathing";
+            }
+            else if (choice == 2)
+            {
+                sign = "Chest pain or pressure";
+            }
+            else if (choice == 3)
+            {
+                sign = "Fainting or sudden confusion";
+            }
+            else if (choice == 4)
+            {
+                sign = "Severe allergic reaction";
+            }
+            else if (choice == 5)
+            {
+                sign = "Feeling unsafe or needing immediate mental health support";
+            }
+
+            // Append sign only if not already selected
+            if (selectedSigns.find(sign) == string::npos)
+            {
+                if (!selectedSigns.empty())
+                {
+                    selectedSigns += ", ";
+                }
+                selectedSigns += sign;
+            }
+            else
+            {
+                cout << "You already added \"" << sign << "\".\n";
+            }
+
+            cout << "Selected so far: " << selectedSigns << "\n";
+            cout << "Add another? (1. Yes, 2. No): ";
+            int addMore = readChoice(1, 2);
+
+            if (addMore == 2)
+            {
+                symptomData.warningSigns = selectedSigns;
+                return true;
+            }
+        }
+        else if (choice == 6)
+        {
+            // If they already selected warning signs before picking 6, keep those; otherwise set "None of These"
+            if (selectedSigns.empty())
+            {
+                symptomData.warningSigns = "None of These";
+            }
+            else
+            {
+                symptomData.warningSigns = selectedSigns;
+            }
+            return true;
+        }
+        else if (choice == 7)
+        {
+            if (!genquesnum5(patient, symptomData))
+            {
+                return false;
+            }
+            return genquesnum6(patient, symptomData);
+        }
+        else if (choice == 8)
+        {
+            mainmenu(patient, symptomData);
             return false;
         }
-        return genquesnum6(patient, symptomData);
     }
-    else if (choice == 8)
-    {
-        mainmenu(patient, symptomData);
-        return false;
-    }
-
-    return true;
 }
 
 bool genquesnum7(PatientData &patient, SymptomData &symptomData)
@@ -317,7 +352,7 @@ bool genquesnum7(PatientData &patient, SymptomData &symptomData)
     cout << "4. Back to Previous Question\n";
     cout << "5. Back to Main Menu\n";
     cout << "Enter your choice: ";
-    choice = readChoice(1, 5); 
+    choice = readChoice(1, 5);
 
     if (choice == 1)
     {
@@ -344,7 +379,51 @@ bool genquesnum7(PatientData &patient, SymptomData &symptomData)
     }
     else if (choice == 5)
     {
-        cout << "main menu\n";
+        mainmenu(patient, symptomData);
+        return false;
+    }
+
+    return true;
+}
+
+bool genquesnum8(PatientData &patient, SymptomData &symptomData)
+{
+    int choice;
+
+    cout << "\nIs there anything you'd like to add?\n";
+    cout << "1. Yes\n";
+    cout << "2. No\n";
+    cout << "3. Back to Previous Question\n";
+    cout << "4. Back to Main Menu\n";
+    cout << "Enter your choice: ";
+    choice = readChoice(1, 4);
+
+    if (choice == 1)
+    {
+        cout << "Please enter anything else you'd like to add: ";
+        getline(cin, symptomData.additionalNotes);
+        if (symptomData.additionalNotes.find_first_not_of(" \t") == string::npos)
+        {
+            symptomData.additionalNotes = "None";
+        }
+        return true;
+    }
+    else if (choice == 2)
+    {
+        symptomData.additionalNotes = "None";
+        return true;
+    }
+    else if (choice == 3)
+    {
+        if (!genquesnum7(patient, symptomData))
+        {
+            return false;
+        }
+        return genquesnum8(patient, symptomData);
+    }
+    else if (choice == 4)
+    {
+        mainmenu(patient, symptomData);
         return false;
     }
 
@@ -375,6 +454,8 @@ void displaySymptomSummary(const SymptomData &symptomData)
 
 bool generalquestions(PatientData &patient, SymptomData &symptomData)
 {
+
+
     if (!genquesnum1(patient, symptomData))
     {
         return false;
@@ -403,7 +484,10 @@ bool generalquestions(PatientData &patient, SymptomData &symptomData)
     {
         return false;
     }
-
+    if (!genquesnum8(patient, symptomData))
+    {
+    return false;
+    }
     symptomData.concern_summary =
         "Duration: " + symptomData.duration +
         "\nSeverity: " + symptomData.severity +
@@ -411,7 +495,9 @@ bool generalquestions(PatientData &patient, SymptomData &symptomData)
         "\nProgression: " + symptomData.progression +
         "\nOther Symptoms: " + symptomData.symptoms +
         "\nUrgent Signs: " + symptomData.warningSigns +
-        "\nMedication/Treatment: " + symptomData.medications;
+        "\nMedication/Treatment: " + symptomData.medications +
+        "\nAdditional Notes: " + symptomData.additionalNotes;
+
 
     symptomData.summaryCompleted = true;
 

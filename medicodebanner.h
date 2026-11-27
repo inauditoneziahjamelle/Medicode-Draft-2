@@ -1,4 +1,5 @@
 #pragma once
 #include "patientdata.h"
+#include "symptomdata.h"
 
-void medicodebanner(PatientData &patient);
+bool medicodebanner(PatientData &patient, SymptomData &symptom);

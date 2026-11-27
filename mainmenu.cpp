@@ -1,10 +1,12 @@
+
 #include <iostream>
+#include <limits>
 #include "mainmenu.h"
 #include "generalquestions.h"
 #include "patientpersonalinfo.h"
 #include "exitprogram.h"
 #include "patientprofile.h"
-#include "hc.h"
+#include "healthcare.h"
 
 
 using namespace std;
@@ -21,18 +23,26 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
         cout << "==============================================================" << endl;
         cout << "||                   1. REQUEST A DOCTOR                    ||" << endl;
         cout << "||                   2. PATIENT PROFILE                     ||" << endl;
-        cout << "||                   4. EXIT                                ||" << endl;
+        cout << "||                   3. EXIT                                ||" << endl;
         cout << "==============================================================" << endl;
         cout << "Enter your choice: ";
-        cin >> choice;
-        
+
+        if (!(cin >> choice))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "Please enter a valid number." << endl;
+            continue;
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (choice)
         {
             case 1:
             {
-               generalquestions(patient,symptoms);
-               healthcare(patient,symptoms);
+                healthcare(patient, symptoms);
                 break;
             }
 
@@ -41,14 +51,14 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
                 cout << endl;
                 cout << "Accessing Patient Profile..." << endl;
                 patientprofile(patient, symptoms);
-    
+
                 break;
             }
 
-            case 3:
+            case 4:
             {
                 exitprogram();
-                return;
+                break;
             }
 
             default:

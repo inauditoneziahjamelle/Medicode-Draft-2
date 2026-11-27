@@ -1,4 +1,7 @@
+
 #include <iostream>
+#include <string>
+
 #include "patientdata.h"
 #include "medicodebanner.h"
 #include "mainmenu.h"
@@ -8,14 +11,9 @@
 #include "patientpersonalinfo.h"
 #include "generalquestions.h"
 #include "patientprofile.h"
-#include "hc.h"
-#include <string>
-#include <cstdio>
-#include <sstream>
-#include <vector>
+#include "healthcare.h"
 #include "pdfgenerator.h"
-#include "PDFgen/pdfgen.h"
- 
+
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -27,8 +25,19 @@ int main()
     PatientData patient;
     SymptomData symptomData;
 
-    medicodebanner(patient);
-    mainmenu (patient, symptomData);
-    healthcare(patient,symptomData);
-    generatepatientpdf (patient, symptomData);
+    // VALIDATE USSD FIRST
+    if (!medicodebanner(patient, symptomData))
+    {
+        cout << "Invalid USSD code. MEDICODE will now close." << endl;
+        return false;
+    }
+
+    // CONTINUE ONLY IF USSD IS VALID
+    mainmenu(patient, symptomData);
+
+    healthcare(patient, symptomData);
+
+    generatepatientpdf(patient, symptomData);
+
+    return 0;
 }

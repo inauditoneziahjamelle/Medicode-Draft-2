@@ -13,6 +13,7 @@ void updatePatientInformation(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
+// Display Personal Information Update Menu
     do
     {
         cout << "\n====================================\n";
@@ -32,6 +33,7 @@ void updatePatientInformation(PatientData &patient, SymptomData &symptomData)
 
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+// Updates Personal Information Based on User Choice
         switch (choice)
         {
             case 1:
@@ -97,5 +99,5 @@ void updatePatientInformation(PatientData &patient, SymptomData &symptomData)
             cout << "\nPersonal information updated successfully!\n";
         }
 
-    } while (choice != 7);
+    } while (choice != 7); // Continue until user chooses to go back
 }

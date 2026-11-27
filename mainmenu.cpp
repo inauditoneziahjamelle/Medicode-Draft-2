@@ -15,6 +15,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
 {
     int choice;
 
+    // Main menu
     while (true)
     {
         cout << endl;
@@ -27,13 +28,14 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
         cout << "==============================================================" << endl;
         cout << "Enter your choice: ";
 
+        // Checks if user input is a valid integer and within the range of menu options
         if (!(cin >> choice))
         {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.clear(); // Clear the error flag on cin
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore the invalid input
 
             cout << "Please enter a valid number." << endl;
-            continue;
+            continue; // Restart the loop to display the menu again
         }
 
         cin.ignore(numeric_limits<streamsize>::max(), '\n');

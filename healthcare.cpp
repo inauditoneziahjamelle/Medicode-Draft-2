@@ -14,7 +14,7 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
 {
  int nextChoice;
 
- // Added a loop to make it come back to the healthcare menu after displaying the symptom summary
+ // Display Healthcare Assistance Menu
  while(true){
  
     
@@ -32,8 +32,7 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
 
            if (nextChoice == 1)
         {
-            displaySymptomSummary(symptomData);
-            // Removed return here so it loops back to the Healthcare Assistance menu
+            displaySymptomSummary(symptomData); 
         }
     else if (nextChoice == 2)
     {

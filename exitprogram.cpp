@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Displays exit message and terminates the program
 void exitprogram()
 {
     cout << endl;

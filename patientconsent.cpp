@@ -10,6 +10,7 @@ using namespace std;
 
 void patientconsent(PatientData &patient)
 {
+    // Display Patient Consent Form
     int choice;
 
     cout << endl;

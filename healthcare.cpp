@@ -23,8 +23,7 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
     cout << "                                                                               ||     [ 3 ] Back to Main Menu                                ||" << endl;
     cout << "                                                                               ||     [ 4 ] Exit                                             ||" << endl;
     cout << "                                                                               +==============================================================+" << endl;
-    cout << "                                                                                                    Enter your choice: ";
-
+   
  // Added a loop to make it come back to the healthcare menu after displaying the symptom summary
  while(true){
  

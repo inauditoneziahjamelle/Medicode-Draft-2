@@ -851,8 +851,9 @@ void patientpersonalinfo(PatientData &patient)
     if (choice == 1)
     {
         cout << endl;
-        cout << "please answer these gen ques bhdjkdc" << endl;
-
+    cout << "                                                                           +=============================================================+" << endl;
+    cout << "                                                                           ||               \033[1mGENERAL PATIENT QUESTIONS\033[0m                    ||" << endl; 
+    cout << "                                                                           +=============================================================+" << endl;
 
         SymptomData symptoms{};
         generalquestions(patient, symptoms);

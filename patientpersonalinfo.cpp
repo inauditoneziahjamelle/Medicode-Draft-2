@@ -842,7 +842,7 @@ void patientpersonalinfo(PatientData &patient)
 
 
     // FINAL OPTIONS
-
+    cout << "\033[0m";
     cout << endl;
     cout << "                                                                            =============================================" << endl;
     cout << "                                                                                           1. Proceed" << endl;

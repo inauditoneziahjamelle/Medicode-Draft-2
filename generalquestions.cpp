@@ -7,7 +7,7 @@
 #include "symptomdata.h"
 #include "mainmenu.h"
 #include "exitprogram.h"
-#include "hc.h"
+#include "healthcare.h"
 
 using namespace std;
 

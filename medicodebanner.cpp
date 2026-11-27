@@ -1,25 +1,26 @@
 #include <iostream>
-#include "medicodebanner.h"
 #include <string>
 #include <windows.h>
+
+#include "medicodebanner.h"
 #include "patientconsent.h"
 #include "patientdata.h"
 #include "exitprogram.h"
-
+#include "symptomdata.h"
 
 using namespace std;
 
 
-void medicodebanner(PatientData &patient)
+bool medicodebanner(PatientData& patient, SymptomData &symptomData)
 {
 
     string code;
     int choice;
     
-    cout << "                                                                                         +================================+" << endl;
-    cout << "                                                                                                Input USSD: ";
+    cout << "                                                                                            +================================+" << endl;
+    cout << "                                                                                                   Input USSD: ";
     cin >> code;
-    cout << "                                                                                         +================================+" << endl;
+    cout << "                                                                                            +================================+" << endl;
     cout << endl;
     cout << endl;
 
@@ -75,28 +76,36 @@ cout << R"(
         cout << "  \033[1;38;2;225;132;132m                                                                         ||   \033[0m                     [ 1 ] Proceed                   \033[1;38;2;225;132;132m   ||" << endl;
         cout << "  \033[1;38;2;225;132;132m                                                                         ||   \033[0m                     [ 2 ] No                     \033[1;38;2;225;132;132m      ||" << endl;
         cout << "  \033[1;38;2;225;132;132m                                                                         +=============================================================+" << endl;
-        cout << "  \033[1;38;2;225;132;132m                                                                                \033[0m                Enter your choice: ";
-        cin >> choice;
         cout << endl;
+        
+        while (true)
+        {
+            cout << "                                                                                              Enter your choice: ";
+            cin >> choice;
+            cout << endl;
 
-        if (choice == 1)
-        {
-            cout << "                                                                                           Proceeding to Patient Consent Form..." << endl;
-            patientconsent(patient);
-        }
-        else if (choice == 2)
-        {
-            exitprogram();
-        }
-        else
-        {
-            cout << "                                                                                              Please choose either 1 or 2." << endl;
+            if (choice == 1)
+            {
+                cout << "                                                                                           Proceeding to Patient Consent Form..." << endl;
+
+                patientconsent(patient);
+
+                return true;
+            }
+            else if (choice == 2)
+            {
+                exitprogram();
+                return false;
+            }
+            else
+            {
+                cout << "                                                                                              Please choose either 1 or 2." << endl;
+            }
         }
     }
     else
     {
         cout << "                                                                                             USSD Invalid. Please Try Again." << endl;
-        return;
+        return false;
     }
-
 }

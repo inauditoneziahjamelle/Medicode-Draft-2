@@ -7,6 +7,7 @@
 #include <windows.h>
 #include "patientpersonalinfo.h"
 #include "patientdata.h"
+#include "generalquestions.h"
 #include "mainmenu.h"
 
 using namespace std;
@@ -850,10 +851,12 @@ void patientpersonalinfo(PatientData &patient)
     if (choice == 1)
     {
         cout << endl;
-        cout << "Proceeding to Main Menu..." << endl;
-
+    cout << "                                                                           +=============================================================+" << endl;
+    cout << "                                                                           ||               \033[1mGENERAL PATIENT QUESTIONS\033[0m                    ||" << endl; 
+    cout << "                                                                           +=============================================================+" << endl;
 
         SymptomData symptoms{};
+        generalquestions(patient, symptoms);
         mainmenu(patient, symptoms);
     }
     else if (choice == 2)

@@ -14,7 +14,7 @@
                 "mainmenu.cpp",
                 "patientprofile.cpp",
                 "updatepatientinfo.cpp",
-                "hc.cpp",
+                "healthcare.cpp",
                 "medicodebanner.cpp",
                 "patientconsent.cpp",
                 "patientpersonalinfo.cpp",

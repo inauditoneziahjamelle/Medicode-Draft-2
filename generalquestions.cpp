@@ -255,7 +255,7 @@ bool genquesnum5(PatientData &patient, SymptomData &symptomData)
 bool genquesnum6(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
-    string selectedSigns = ""; // Reset selection list each time Question 6 starts
+    string selectedSigns = ""; 
 
     while (true)
     {
@@ -321,7 +321,7 @@ bool genquesnum6(PatientData &patient, SymptomData &symptomData)
         }
         else if (choice == 6)
         {
-            // If they already selected warning signs before picking 6, keep those; otherwise set "None of These"
+        
             if (selectedSigns.empty())
             {
                 symptomData.warningSigns = "None of These";

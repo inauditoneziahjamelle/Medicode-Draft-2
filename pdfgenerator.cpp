@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstdio>
 #include <iostream>
 #include <sstream>
@@ -11,92 +12,229 @@ using namespace std;
 
 namespace
 {
-const double PAGE_TOP = 790.0;
-const double PAGE_BOTTOM = 50.0;
-const double LEFT_MARGIN = 50.0;
-const size_t MAX_LINE_LENGTH = 88;
-
-string displayValue(const string &value)
-{
-    return value.empty() ? "Not provided" : value;
-}
-
-vector<string> wrapText(const string &text, size_t maxLength)
-{
-    vector<string> lines;
-    string logicalLine;
-    istringstream input(text);
-
-    while (getline(input, logicalLine))
+    struct RowItem
     {
-        istringstream words(logicalLine);
-        string word;
-        string line;
+        string label;
+        string value;
+    };
 
-        while (words >> word)
+    struct SectionTable
+    {
+        string title;
+        vector<RowItem> rows;
+        string fullWidthNote;
+    };
+
+    vector<string> wrapTextToWidth(const string &text,
+                                   double maxWidth,
+                                   double fontSize)
+    {
+        // Approximate average character width for Helvetica (~0.50 * fontSize)
+        const double avgCharWidth = fontSize * 0.50;
+        const size_t maxChars = max<size_t>(1, static_cast<size_t>(maxWidth / avgCharWidth));
+
+        vector<string> wrappedLines;
+        istringstream input(text);
+        string word;
+        string currentLine;
+
+        while (input >> word)
         {
-            if (line.empty())
+            if (word.length() > maxChars)
             {
-                line = word;
+                if (!currentLine.empty())
+                {
+                    wrappedLines.push_back(currentLine);
+                    currentLine.clear();
+                }
+
+                size_t pos = 0;
+                while (pos < word.length())
+                {
+                    wrappedLines.push_back(word.substr(pos, maxChars));
+                    pos += maxChars;
+                }
             }
-            else if (line.length() + 1 + word.length() <= maxLength)
+            else if (currentLine.empty())
             {
-                line += " " + word;
+                currentLine = word;
+            }
+            else if (currentLine.length() + 1 + word.length() <= maxChars)
+            {
+                currentLine += " " + word;
             }
             else
             {
-                lines.push_back(line);
-                line = word;
+                wrappedLines.push_back(currentLine);
+                currentLine = word;
             }
         }
 
-        lines.push_back(line);
+        if (!currentLine.empty())
+        {
+            wrappedLines.push_back(currentLine);
+        }
+
+        if (wrappedLines.empty())
+        {
+            wrappedLines.push_back("");
+        }
+
+        return wrappedLines;
     }
 
-    if (lines.empty())
+    void drawSectionHeader(pdf_doc *pdf,
+                           double &positionY,
+                           double leftX,
+                           double tableWidth,
+                           const string &title)
     {
-        lines.push_back("");
+        const double headerHeight = 22.0;
+        const uint32_t headerFill = PDF_RGB(178, 34, 34);
+        const uint32_t borderColor = PDF_RGB(64, 64, 64);
+
+        // PDFgen y coordinates start at the bottom of the rectangle
+        double rectBottomY = positionY - headerHeight;
+
+        pdf_add_filled_rectangle(pdf, NULL, leftX, rectBottomY,
+                                 tableWidth, headerHeight,
+                                 0.8, headerFill, borderColor);
+
+        pdf_add_text(pdf, NULL, title.c_str(), 11.0,
+                     leftX + 8.0, rectBottomY + 7.0, PDF_WHITE);
+
+        positionY = rectBottomY;
     }
 
-    return lines;
-}
-
-void addPDFLine(pdf_doc *pdf, const string &text, double fontSize,
-                double &positionY)
-{
-    if (positionY < PAGE_BOTTOM + 20)
+    void drawTableRow(pdf_doc *pdf,
+                      double &positionY,
+                      double pageBottom,
+                      double pageTop,
+                      double leftX,
+                      double labelColWidth,
+                      double valueColWidth,
+                      const string &sectionTitle,
+                      const RowItem &row,
+                      bool alternateShade)
     {
-        pdf_append_page(pdf);
-        positionY = PAGE_TOP;
+        const double fontSize = 10.0;
+        const double lineHeight = 13.0;
+        const double cellPadY = 6.0;
+        const double cellPadX = 7.0;
+        const double tableWidth = labelColWidth + valueColWidth;
+
+        string safeValue = row.value.empty() ? "Not provided" : row.value;
+
+        vector<string> labelLines = wrapTextToWidth(
+            row.label, labelColWidth - (2.0 * cellPadX), fontSize);
+        vector<string> valueLines = wrapTextToWidth(
+            safeValue, valueColWidth - (2.0 * cellPadX), fontSize);
+
+        size_t maxLines = max(labelLines.size(), valueLines.size());
+        double rowHeight = (maxLines * lineHeight) + (2.0 * cellPadY);
+
+        if (positionY - rowHeight < pageBottom)
+        {
+            pdf_append_page(pdf);
+            positionY = pageTop;
+            drawSectionHeader(pdf, positionY, leftX, tableWidth,
+                              sectionTitle + " (Continued)");
+        }
+
+        double rowBottomY = positionY - rowHeight;
+        uint32_t borderColor = PDF_RGB(140, 140, 140);
+
+        if (alternateShade)
+        {
+            uint32_t stripeColor = PDF_RGB(253, 242, 242);
+            pdf_add_filled_rectangle(pdf, NULL, leftX, rowBottomY,
+                                     tableWidth, rowHeight,
+                                     0.0, stripeColor, stripeColor);
+        }
+
+        // Outer box & vertical column divider
+        pdf_add_rectangle(pdf, NULL, leftX, rowBottomY,
+                          tableWidth, rowHeight, 0.6, borderColor);
+        pdf_add_line(pdf, NULL,
+                     leftX + labelColWidth, rowBottomY,
+                     leftX + labelColWidth, positionY,
+                     0.6, borderColor);
+
+        // Label text (top-aligned inside cell)
+        double textY = positionY - cellPadY - fontSize;
+        for (size_t i = 0; i < labelLines.size(); ++i)
+        {
+            pdf_add_text(pdf, NULL, labelLines[i].c_str(), fontSize,
+                         leftX + cellPadX, textY, PDF_BLACK);
+            textY -= lineHeight;
+        }
+
+        // Value text (top-aligned inside cell)
+        textY = positionY - cellPadY - fontSize;
+        for (size_t i = 0; i < valueLines.size(); ++i)
+        {
+            pdf_add_text(pdf, NULL, valueLines[i].c_str(), fontSize,
+                         leftX + labelColWidth + cellPadX, textY, PDF_BLACK);
+            textY -= lineHeight;
+        }
+
+        positionY = rowBottomY;
     }
 
-    pdf_add_text(pdf, NULL, text.c_str(), fontSize,
-                 LEFT_MARGIN, positionY, PDF_BLACK);
-    positionY -= fontSize + 7;
-}
-
-void addPDFHeading(pdf_doc *pdf, const string &heading, double &positionY)
-{
-    positionY -= 4;
-    addPDFLine(pdf, heading, 14, positionY);
-    addPDFLine(pdf, "------------------------------------------------------------", 8, positionY);
-}
-
-void addPDFField(pdf_doc *pdf, const string &label, const string &value,
-                 double &positionY)
-{
-    const vector<string> lines = wrapText(label + ": " + displayValue(value), MAX_LINE_LENGTH);
-
-    for (size_t i = 0; i < lines.size(); ++i)
+    void drawNoteRow(pdf_doc *pdf,
+                     double &positionY,
+                     double pageBottom,
+                     double pageTop,
+                     double leftX,
+                     double tableWidth,
+                     const string &sectionTitle,
+                     const string &note)
     {
-        addPDFLine(pdf, lines[i], 10, positionY);
+        const double fontSize = 10.0;
+        const double lineHeight = 13.0;
+        const double cellPadY = 7.0;
+        const double cellPadX = 8.0;
+
+        vector<string> noteLines = wrapTextToWidth(
+            note, tableWidth - (2.0 * cellPadX), fontSize);
+        double rowHeight = (noteLines.size() * lineHeight) + (2.0 * cellPadY);
+
+        if (positionY - rowHeight < pageBottom)
+        {
+            pdf_append_page(pdf);
+            positionY = pageTop;
+            drawSectionHeader(pdf, positionY, leftX, tableWidth,
+                              sectionTitle + " (Continued)");
+        }
+
+        double rowBottomY = positionY - rowHeight;
+        uint32_t borderColor = PDF_RGB(140, 140, 140);
+
+        pdf_add_rectangle(pdf, NULL, leftX, rowBottomY,
+                          tableWidth, rowHeight, 0.6, borderColor);
+
+        double textY = positionY - cellPadY - fontSize;
+        for (size_t i = 0; i < noteLines.size(); ++i)
+        {
+            pdf_add_text(pdf, NULL, noteLines[i].c_str(), fontSize,
+                         leftX + cellPadX, textY, PDF_BLACK);
+            textY -= lineHeight;
+        }
+
+        positionY = rowBottomY;
     }
-}
-}
+} // namespace
 
 void generatePatientPDF(const PatientData &patient,
                         const SymptomData &symptomData)
 {
+    const double PAGE_TOP = 790.0;
+    const double PAGE_BOTTOM = 50.0;
+    const double LEFT_MARGIN = 45.0;
+    const double TABLE_WIDTH = PDF_A4_WIDTH - (2.0 * LEFT_MARGIN);
+    const double LABEL_COL_WIDTH = 185.0;
+    const double VALUE_COL_WIDTH = TABLE_WIDTH - LABEL_COL_WIDTH;
+
     struct pdf_info info = {};
     snprintf(info.creator, sizeof(info.creator), "MEDICODE");
     snprintf(info.title, sizeof(info.title), "Patient Summary");
@@ -114,69 +252,156 @@ void generatePatientPDF(const PatientData &patient,
 
     double positionY = PAGE_TOP;
 
-    addPDFLine(pdf, "MEDICODE", 24, positionY);
-    addPDFLine(pdf, "PATIENT SUMMARY", 16, positionY);
+    // ==========================================
+    // TITLE BANNER
+    // ==========================================
 
-    addPDFHeading(pdf, "PATIENT INFORMATION", positionY);
-    addPDFField(pdf, "Patient ID", patient.patientID, positionY);
-    addPDFField(pdf, "Name", patient.name, positionY);
-    addPDFField(pdf, "Age", patient.age, positionY);
-    addPDFField(pdf, "Sex", patient.sex, positionY);
-    addPDFField(pdf, "Address", patient.address, positionY);
-    addPDFField(pdf, "Civil Status", patient.civilStatus, positionY);
+    pdf_add_text(pdf, NULL, "MEDICODE", 22.0,
+                 LEFT_MARGIN, positionY - 22.0, PDF_BLACK);
+    pdf_add_text(pdf, NULL, "PATIENT SUMMARY", 13.0,
+                 LEFT_MARGIN, positionY - 40.0, PDF_RGB(64, 64, 64));
+    pdf_add_line(pdf, NULL,
+                 LEFT_MARGIN, positionY - 48.0,
+                 LEFT_MARGIN + TABLE_WIDTH, positionY - 48.0,
+                 1.2, PDF_RGB(178, 34, 34));
 
-    addPDFHeading(pdf, "HISTORY OF PRESENT ILLNESS", positionY);
-    addPDFField(pdf, "History of Present Illness", patient.historyPresentIllness, positionY);
+    positionY -= 62.0;
 
-    addPDFHeading(pdf, "PAST MEDICAL HISTORY", positionY);
-    addPDFField(pdf, "Operations", patient.operations, positionY);
-    addPDFField(pdf, "Immunizations", patient.immunizations, positionY);
-    addPDFField(pdf, "Allergies", patient.allergies, positionY);
-    addPDFField(pdf, "Hospitalizations", patient.hospitalizations, positionY);
-    addPDFField(pdf, "Maintenance Medications", patient.maintenanceMeds, positionY);
-    addPDFField(pdf, "Others", patient.othersMedical, positionY);
+    // ==========================================
+    // BUILD SECTION TABLES
+    // ==========================================
 
-    addPDFHeading(pdf, "FAMILY HISTORY", positionY);
-    addPDFField(pdf, "Bronchial Asthma", patient.bronchialAsthma, positionY);
-    addPDFField(pdf, "Diabetes Mellitus", patient.diabetesMellitus, positionY);
-    addPDFField(pdf, "Hypertension", patient.hypertension, positionY);
-    addPDFField(pdf, "Pulmonary Tuberculosis", patient.pulmonaryTuberculosis, positionY);
-    addPDFField(pdf, "Others", patient.othersFamily, positionY);
+    vector<SectionTable> sections;
 
-    addPDFHeading(pdf, "SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY", positionY);
-    addPDFField(pdf, "Smoker", patient.smoker, positionY);
-    addPDFField(pdf, "Alcoholic Beverage Drinker", patient.alcoholicBeverageDrinker, positionY);
-    addPDFField(pdf, "Work/Environmental Hazards", patient.workEnvironmentalHazards, positionY);
+    SectionTable patientInfo;
+    patientInfo.title = "PATIENT INFORMATION";
+    patientInfo.rows = {
+        {"Patient ID", patient.patientID},
+        {"Name", patient.name},
+        {"Age", patient.age},
+        {"Sex", patient.sex},
+        {"Address", patient.address},
+        {"Civil Status", patient.civilStatus}
+    };
+    sections.push_back(patientInfo);
+
+    SectionTable hpi;
+    hpi.title = "HISTORY OF PRESENT ILLNESS";
+    hpi.rows = {
+        {"History of Present Illness", patient.historyPresentIllness}
+    };
+    sections.push_back(hpi);
+
+    SectionTable pmh;
+    pmh.title = "PAST MEDICAL HISTORY";
+    pmh.rows = {
+        {"Operations", patient.operations},
+        {"Immunizations", patient.immunizations},
+        {"Allergies", patient.allergies},
+        {"Hospitalizations", patient.hospitalizations},
+        {"Maintenance Medications", patient.maintenanceMeds},
+        {"Others", patient.othersMedical}
+    };
+    sections.push_back(pmh);
+
+    SectionTable familyHistory;
+    familyHistory.title = "FAMILY HISTORY";
+    familyHistory.rows = {
+        {"Bronchial Asthma", patient.bronchialAsthma},
+        {"Diabetes Mellitus", patient.diabetesMellitus},
+        {"Hypertension", patient.hypertension},
+        {"Pulmonary Tuberculosis", patient.pulmonaryTuberculosis},
+        {"Others", patient.othersFamily}
+    };
+    sections.push_back(familyHistory);
+
+    SectionTable socialHistory;
+    socialHistory.title = "SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY";
+    socialHistory.rows = {
+        {"Smoker", patient.smoker},
+        {"Alcoholic Beverage Drinker", patient.alcoholicBeverageDrinker},
+        {"Work/Environmental Hazards", patient.workEnvironmentalHazards}
+    };
+    sections.push_back(socialHistory);
 
     if (patient.sex == "Female")
     {
-        addPDFHeading(pdf, "OB-GYNE HISTORY", positionY);
-        addPDFField(pdf, "Menarche", patient.menarche, positionY);
-        addPDFField(pdf, "Menstrual History", patient.menstrualHistory, positionY);
-        addPDFField(pdf, "Gravida", patient.gravida, positionY);
-        addPDFField(pdf, "Para", patient.para, positionY);
-        addPDFField(pdf, "Last Menstrual Period", patient.lastMenstrualPeriod, positionY);
-        addPDFField(pdf, "Menopause", patient.menopause, positionY);
-        addPDFField(pdf, "Others", patient.othersOBGyne, positionY);
+        SectionTable obGyne;
+        obGyne.title = "OB-GYNE HISTORY";
+        obGyne.rows = {
+            {"Menarche", patient.menarche},
+            {"Menstrual History", patient.menstrualHistory},
+            {"Gravida", patient.gravida},
+            {"Para", patient.para},
+            {"Last Menstrual Period", patient.lastMenstrualPeriod},
+            {"Menopause", patient.menopause},
+            {"Others", patient.othersOBGyne}
+        };
+        sections.push_back(obGyne);
     }
 
-    addPDFHeading(pdf, "SYMPTOM SUMMARY", positionY);
+    SectionTable symptomSection;
+    symptomSection.title = "SYMPTOM SUMMARY";
     if (symptomData.summaryCompleted)
     {
-        addPDFField(pdf, "Duration", symptomData.duration, positionY);
-        addPDFField(pdf, "Severity", symptomData.severity, positionY);
-        addPDFField(pdf, "Impact on Activities", symptomData.impact, positionY);
-        addPDFField(pdf, "Progression", symptomData.progression, positionY);
-        addPDFField(pdf, "Other Symptoms", symptomData.symptoms, positionY);
-        addPDFField(pdf, "Warning Signs", symptomData.warningSigns, positionY);
-        addPDFField(pdf, "Medication/Treatment", symptomData.medications, positionY);
+        symptomSection.rows = {
+            {"Duration", symptomData.duration},
+            {"Severity", symptomData.severity},
+            {"Impact on Activities", symptomData.impact},
+            {"Progression", symptomData.progression},
+            {"Other Symptoms", symptomData.symptoms},
+            {"Warning Signs", symptomData.warningSigns},
+            {"Medication/Treatment", symptomData.medications}
+        };
     }
     else
     {
-        addPDFLine(pdf, "No symptom questionnaire has been completed.", 10, positionY);
+        symptomSection.fullWidthNote = "No symptom questionnaire has been completed.";
+    }
+    sections.push_back(symptomSection);
+
+    // ==========================================
+    // RENDER TABLES TO PDF
+    // ==========================================
+
+    for (size_t s = 0; s < sections.size(); ++s)
+    {
+        // Keep header attached to at least one row when possible
+        if (positionY - 46.0 < PAGE_BOTTOM)
+        {
+            pdf_append_page(pdf);
+            positionY = PAGE_TOP;
+        }
+
+        drawSectionHeader(pdf, positionY, LEFT_MARGIN, TABLE_WIDTH,
+                          sections[s].title);
+
+        if (!sections[s].fullWidthNote.empty())
+        {
+            drawNoteRow(pdf, positionY, PAGE_BOTTOM, PAGE_TOP,
+                        LEFT_MARGIN, TABLE_WIDTH,
+                        sections[s].title, sections[s].fullWidthNote);
+        }
+        else
+        {
+            for (size_t r = 0; r < sections[s].rows.size(); ++r)
+            {
+                drawTableRow(pdf, positionY, PAGE_BOTTOM, PAGE_TOP,
+                             LEFT_MARGIN, LABEL_COL_WIDTH, VALUE_COL_WIDTH,
+                             sections[s].title, sections[s].rows[r],
+                             (r % 2 == 1));
+            }
+        }
+
+        positionY -= 14.0;
     }
 
+    // ==========================================
+    // SAVE PDF
+    // ==========================================
+
     const int result = pdf_save(pdf, "MEDICODE_Summary.pdf");
+
     pdf_destroy(pdf);
 
     if (result >= 0)

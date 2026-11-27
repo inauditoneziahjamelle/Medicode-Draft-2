@@ -13,6 +13,8 @@ using namespace std;
 
 int readChoice(int minimum, int maximum);
 
+
+// Duration
 bool genquesnum1(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -58,6 +60,7 @@ bool genquesnum1(PatientData &patient, SymptomData &symptomData)
     }
 }
 
+// Severity
 bool genquesnum2(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -103,6 +106,7 @@ bool genquesnum2(PatientData &patient, SymptomData &symptomData)
     return true;
 }
 
+// Impact on Activities
 bool genquesnum3(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -154,6 +158,7 @@ bool genquesnum3(PatientData &patient, SymptomData &symptomData)
     return true;
 }
 
+// Condition Progression
 bool genquesnum4(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -205,6 +210,7 @@ bool genquesnum4(PatientData &patient, SymptomData &symptomData)
     return true;
 }
 
+// Other Symptoms or Concerns
 bool genquesnum5(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -245,6 +251,7 @@ bool genquesnum5(PatientData &patient, SymptomData &symptomData)
     return true;
 }
 
+// Urgent Warning Signs
 bool genquesnum6(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -288,7 +295,7 @@ bool genquesnum6(PatientData &patient, SymptomData &symptomData)
                 sign = "Feeling unsafe or needing immediate mental health support";
             }
 
-            // Append sign only if not already selected
+         
             if (selectedSigns.find(sign) == string::npos)
             {
                 if (!selectedSigns.empty())
@@ -341,6 +348,7 @@ bool genquesnum6(PatientData &patient, SymptomData &symptomData)
     }
 }
 
+// Medication or Treatment
 bool genquesnum7(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -386,6 +394,7 @@ bool genquesnum7(PatientData &patient, SymptomData &symptomData)
     return true;
 }
 
+// Additional Notes
 bool genquesnum8(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
@@ -430,6 +439,7 @@ bool genquesnum8(PatientData &patient, SymptomData &symptomData)
     return true;
 }
 
+// Symptom Summary Display
 void displaySymptomSummary(const SymptomData &symptomData)
 {
     cout << "\n========================================\n";
@@ -452,6 +462,7 @@ void displaySymptomSummary(const SymptomData &symptomData)
     }
 }
 
+// Runs every question in order and returns true if all questions are completed, false if the user goes back to the main menu
 bool generalquestions(PatientData &patient, SymptomData &symptomData)
 {
 

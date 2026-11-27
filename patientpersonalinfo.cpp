@@ -533,7 +533,6 @@ void patientpersonalinfo(PatientData &patient)
         patient.workEnvironmentalHazards = "Not Specified";
     }
 
-
     // VI. OB-GYNE HISTORY
     // FEMALE ONLY
 

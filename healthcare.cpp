@@ -58,7 +58,7 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
     else if (nextChoice == 4)
     {
         exitprogram();
-        return;
+        break;
     }
   }
 }

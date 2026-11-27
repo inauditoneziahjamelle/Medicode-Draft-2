@@ -53,7 +53,8 @@ void patientconsent(PatientData &patient)
     {
         cout << "                                                                                   Consent was not provided. MEDICODE will now close." << endl;
         exitprogram();
-        return;
+
+    return;
     }
     else
     {

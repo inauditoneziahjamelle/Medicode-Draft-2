@@ -167,7 +167,7 @@ void healthcarefacility()
         cout << endl;
         cout << "Exiting the program..." << endl;
         exitprogram();
-        return;
+    
     }
 
 

@@ -19,7 +19,7 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
  
     
     cout << "                                                                               +==============================================================+" << endl;
-    cout << "                                                                               ||                   HEALTHCARE ASSISTANCE                    ||"<< endl;
+    cout << "                                                                               ||                   HEALTHCARE ASSISTANCE                    ||" << endl;
     cout << "                                                                               +==============================================================+" << endl;
     cout << "                                                                               ||     [ 1 ] View Symptom Summary                             ||" << endl;
     cout << "                                                                               ||     [ 2 ] Connect to an Available General Practitioner     ||" << endl;

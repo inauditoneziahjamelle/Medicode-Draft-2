@@ -15,7 +15,7 @@ void patientconsent(PatientData &patient)
 
     cout << endl;
     cout << "                                                                           +=============================================================+" << endl;
-    cout << "                                                                           ||  \033[0m                    \033[1mPATIENT CONSENT\033[0m                       ||" << endl;
+    cout << "                                                                           ||  \033[0m                    \033[1mPATIENT CONSENT\033[0m                      ||" << endl;
     cout << "                                                                           +=============================================================+" << endl;
     cout << "                                                                           ||                                                           ||" << endl;
     cout << "                                                                           ||      \033[3mBy using MEDICODE, your personal and medical\033[0m         ||" << endl;

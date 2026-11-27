@@ -53,7 +53,7 @@ void patientprofile(PatientData &patient, SymptomData &symptomData)
             break;
         }
         
-        case 3: //prinr user profile
+        case 3: //print user profile
         {
             generatepatientpdf(patient, symptomData);
             break;

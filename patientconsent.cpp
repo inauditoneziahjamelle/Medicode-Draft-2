@@ -10,6 +10,7 @@ using namespace std;
 
 void patientconsent(PatientData &patient)
 {
+    // Display Patient Consent Form
     int choice;
 
     cout << endl;
@@ -27,7 +28,7 @@ void patientconsent(PatientData &patient)
     cout << "                                                                           +=============================================================+" << endl;
     cout << "                                                                                                  Enter your choice: ";    
                                                                                                                cin >> choice;
-
+// Check if the input is valid
     if (cin.fail())
     {
         cin.clear();

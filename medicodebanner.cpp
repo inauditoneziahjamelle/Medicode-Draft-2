@@ -13,7 +13,7 @@ using namespace std;
 
 bool medicodebanner(PatientData& patient, SymptomData &symptomData)
 {
-
+// Display MEDICODE Banner and Prompt for USSD Code
     string code;
     int choice;
     
@@ -24,6 +24,7 @@ bool medicodebanner(PatientData& patient, SymptomData &symptomData)
     cout << endl;
     cout << endl;
 
+// Check if the USSD code is correct
     if (code == "*206#")
     {
     SetConsoleOutputCP(CP_UTF8);
@@ -42,7 +43,7 @@ cout << R"(
         cout << "                                                                                          Ｍｅｄｉｃａｌ  Ａｓｓｉｓｔａｎｃｅ．" << endl;
                                                                                                                                       
        
-                               
+// Display Disclaimer                   
         cout << "\033[0m";
         cout << "\033[1;38;5;88m";
         cout << "                                                                                           ▄ ▄ ▄                               " << endl;

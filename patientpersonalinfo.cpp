@@ -38,7 +38,7 @@ string readRequiredText()
 
 
 
-
+// VALIDATES INTEGER INPUT WITHIN A RANGE
 int readChoice(int minimum, int maximum)
 {
     string input;
@@ -58,6 +58,7 @@ int readChoice(int minimum, int maximum)
         size_t position = 0;
         int value;
 
+// Try Catch feature
         try
         {
             value = stoi(input, &position);

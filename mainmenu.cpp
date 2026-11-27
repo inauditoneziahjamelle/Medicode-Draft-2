@@ -1,13 +1,16 @@
 
 #include <iostream>
 #include <limits>
+#include <string>
+#include <vector>
+
 #include "mainmenu.h"
 #include "generalquestions.h"
 #include "patientpersonalinfo.h"
 #include "exitprogram.h"
 #include "patientprofile.h"
 #include "healthcare.h"
-
+#include "displaybox.h"
 
 using namespace std;
 
@@ -15,27 +18,27 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
 {
     int choice;
 
-    // Main menu
     while (true)
     {
         cout << endl;
-        cout << "==============================================================" << endl;
-        cout << "||                        \033[1mMAIN MENU\033[0m                         ||" << endl;
-        cout << "==============================================================" << endl;
-        cout << "||                   1. REQUEST A DOCTOR                    ||" << endl;
-        cout << "||                   2. PATIENT PROFILE                     ||" << endl;
-        cout << "||                   3. EXIT                                ||" << endl;
-        cout << "==============================================================" << endl;
+
+        displayQuestionBox("MAIN MENU", {
+            "[ 1 ] REQUEST A DOCTOR",
+            "[ 2 ] PATIENT PROFILE",
+            "[ 3 ] EXIT"
+        });
+
+        cout << endl;
         cout << "Enter your choice: ";
 
-        // Checks if user input is a valid integer and within the range of menu options
+        // Check if the input is a valid integer
         if (!(cin >> choice))
         {
-            cin.clear(); // Clear the error flag on cin
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore the invalid input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             cout << "Please enter a valid number." << endl;
-            continue; // Restart the loop to display the menu again
+            continue;
         }
 
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -52,6 +55,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
             {
                 cout << endl;
                 cout << "Accessing Patient Profile..." << endl;
+
                 patientprofile(patient, symptoms);
 
                 break;
@@ -60,7 +64,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
             case 3:
             {
                 exitprogram();
-                break;
+                return;
             }
 
             default:

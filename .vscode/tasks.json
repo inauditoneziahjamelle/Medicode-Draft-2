@@ -23,6 +23,7 @@
                 "exitprogram.cpp",
                 "pdfgenerator.cpp",
                 "PDFgen/pdfgen.c",
+                "displaybox.cpp",
                 "-o",
                 "main.exe"
             ],

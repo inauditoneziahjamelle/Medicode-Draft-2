@@ -18,14 +18,14 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
  while(true){
  
     
-    cout << "                                                                               +==============================================================+" << endl;
-    cout << "                                                                               ||                   HEALTHCARE ASSISTANCE                    ||" << endl;
-    cout << "                                                                               +==============================================================+" << endl;
-    cout << "                                                                               ||     [ 1 ] View Symptom Summary                             ||" << endl;
-    cout << "                                                                               ||     [ 2 ] Connect to an Available General Practitioner     ||" << endl;
-    cout << "                                                                               ||     [ 3 ] Back to Main Menu                                ||" << endl;
-    cout << "                                                                               ||     [ 4 ] Exit                                             ||" << endl;
-    cout << "                                                                               +==============================================================+" << endl;
+    cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                   HEALTHCARE ASSISTANCE                    \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m     [ 1 ] View Symptom Summary                             \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m     [ 2 ] Connect to an Available General Practitioner     \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m     [ 3 ] Back to Main Menu                                \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m     [ 4 ] Exit                                             \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
    
     cin >> nextChoice;
 

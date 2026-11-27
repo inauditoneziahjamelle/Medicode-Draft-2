@@ -16,10 +16,10 @@ void medicodebanner(PatientData &patient)
     string code;
     int choice;
     
-    cout << "                                                                                        +================================+" << endl;
+    cout << "                                                                                         +================================+" << endl;
     cout << "                                                                                                Input USSD: ";
     cin >> code;
-    cout << "                                                                                        +================================+" << endl;
+    cout << "                                                                                         +================================+" << endl;
     cout << endl;
     cout << endl;
 
@@ -57,7 +57,7 @@ cout << R"(
         cout << "                                                                           ||  \033[0m                       \033[1mDISCLAIMER:\033[0m       \033[1;38;2;225;132;132m                ||" << endl;
         cout << "                                                                           +=============================================================+" << endl;
         cout << "                                                                           ||                                                           ||" << endl;
-        cout << "                                                                           || \033[0m   \033[3mMEDICODE asks questions about your symptoms and\033[0m    \033[1;38;2;225;132;132m    ||" << endl;
+        cout << "                                                                           || \033[0m  \033[3mMEDICODE asks questions about your symptoms and\033[0m    \033[1;38;2;225;132;132m     ||" << endl;
         cout << "  \033[1;38;2;225;132;132m                                                                         || \033[0m  \033[3mconnects you to available General Practitioners (GPs)\033[0m \033[1;38;2;225;132;132m  ||" << endl;
         cout << "  \033[1;38;2;225;132;132m                                                                         || \033[0m  \033[3mwho can provide general health guidance.\033[0m             \033[1;38;2;225;132;132m   ||" << endl;
         cout << "  \033[1;38;2;225;132;132m                                                                         ||                                                           ||" << endl;

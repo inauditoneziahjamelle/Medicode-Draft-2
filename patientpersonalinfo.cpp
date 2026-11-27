@@ -20,18 +20,19 @@ string readRequiredText()
     {
         try
         {
-            getline(cin >> ws, input);
+            getline(cin, input);
 
-            if (input.empty())
+            if (input.find_first_not_of(" \\t") == string::npos)
             {
-                throw invalid_argument("This field is required.");
+                throw invalid_argument("You need to fill this up!");
             }
 
             return input;
         }
         catch (const exception& e)
         {
-            cout << e.what() << " Please enter the information." << endl;
+            cout << "\\033[3;31m" << e.what() << "\\033[0m" << endl;
+            cout << "Please enter the information: ";
         }
     }
 }
@@ -133,22 +134,22 @@ void patientpersonalinfo(PatientData &patient)
     cout << endl;
 
     cout << "                                                                                                   Name of Patient: ";
-    patient.name = readRequiredText();
+                                                                                                                patient.name = readRequiredText();
 
     cout << "                                                                                                   Age: ";
-    patient.age = readRequiredText();
+                                                                                                                patient.age = readRequiredText();
 
     cout << "                                                                                                   Address: ";
-    patient.address = readRequiredText();
+                                                                                                                patient.address = readRequiredText();
 
     cout << "                                                                                                   Civil Status: ";
-    patient.civilStatus = readRequiredText();
+                                                                                                                patient.civilStatus = readRequiredText();
 
     cout << "                                                                                                   Sex:" << endl;
     cout << "                                                                                                   [ 1 ] Male" << endl;
     cout << "                                                                                                   [ 2 ] Female" << endl;
     cout << "                                                                                                   Enter choice: ";
-    sexChoice = readChoice(1, 2);
+                                                                                                                sexChoice = readChoice(1, 2);
     if (sexChoice == 1)
     {
         patient.sexChoice = "Male";

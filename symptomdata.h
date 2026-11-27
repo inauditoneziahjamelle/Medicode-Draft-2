@@ -16,6 +16,7 @@ struct SymptomData
     std::string symptoms;
     std::string medications;
     std::string concern_summary;
+    std::string additionalNotes;
     
     bool summaryCompleted = false;
 };

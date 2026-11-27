@@ -90,7 +90,7 @@ namespace
                            const string &title)
     {
         const double headerHeight = 22.0;
-        const uint32_t headerFill = PDF_RGB(36, 92, 148);
+        const uint32_t headerFill = PDF_RGB(178, 34, 34);
         const uint32_t borderColor = PDF_RGB(64, 64, 64);
 
         // PDFgen y coordinates start at the bottom of the rectangle
@@ -146,7 +146,7 @@ namespace
 
         if (alternateShade)
         {
-            uint32_t stripeColor = PDF_RGB(242, 247, 252);
+            uint32_t stripeColor = PDF_RGB(253, 242, 242);
             pdf_add_filled_rectangle(pdf, NULL, leftX, rowBottomY,
                                      tableWidth, rowHeight,
                                      0.0, stripeColor, stripeColor);
@@ -263,7 +263,7 @@ void generatepatientpdf(const PatientData &patient,
     pdf_add_line(pdf, NULL,
                  LEFT_MARGIN, positionY - 48.0,
                  LEFT_MARGIN + TABLE_WIDTH, positionY - 48.0,
-                 1.2, PDF_RGB(36, 92, 148));
+                 1.2, PDF_RGB(178, 34, 34));
 
     positionY -= 62.0;
 

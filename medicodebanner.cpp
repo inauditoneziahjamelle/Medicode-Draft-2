@@ -82,7 +82,7 @@ cout << R"(
         
         while (true)
         {
-            cout << "                                                                                              Enter your choice: ";
+            cout << "                                                                                                   Enter your choice: ";
             cin >> choice;
             cout << endl;
 

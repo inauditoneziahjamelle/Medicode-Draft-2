@@ -612,17 +612,17 @@ void patientpersonalinfo(PatientData &patient)
     if (patient.sexChoice == "Female")
     {
         cout << endl;
-        cout << "                                                                                   VI. OB-GYNE HISTORY" << endl;
+        cout << "                                                                                       VI. OB-GYNE HISTORY" << endl;
         cout << endl;
 
         // MENARCHE
-        cout << "                                                                                               MENARCHE (First menstruation):" << endl;
-        cout << "                                                                                               [ 1 ] Before 10 years old" << endl;
-        cout << "                                                                                               [ 2 ] 10-12 years old" << endl;
-        cout << "                                                                                               [ 3 ] 13-15 years old" << endl;
-        cout << "                                                                                               [ 4 ] 16 years old or above" << endl;
-        cout << "                                                                                               [ 5 ] Unknown" << endl;
-        cout << "                                                                                               Enter choice: ";
+        cout << "                                                                                                   MENARCHE (First menstruation):" << endl;
+        cout << "                                                                                                   [ 1 ] Before 10 years old" << endl;
+        cout << "                                                                                                   [ 2 ] 10-12 years old" << endl;
+        cout << "                                                                                                   [ 3 ] 13-15 years old" << endl;
+        cout << "                                                                                                   [ 4 ] 16 years old or above" << endl;
+        cout << "                                                                                                   [ 5 ] Unknown" << endl;
+        cout << "                                                                                                   Enter choice: ";
         option = readChoice(1, 5);
 
         if (option == 1)
@@ -640,12 +640,12 @@ void patientpersonalinfo(PatientData &patient)
         // MENSTRUAL HISTORY
 
         cout << endl;
-        cout << "                                                                                               MENSTRUAL HISTORY:" << endl;
-        cout << "                                                                                               [ 1 ] Regular" << endl;
-        cout << "                                                                                               [ 2 ] Irregular" << endl;
-        cout << "                                                                                               [ 3 ] Not Applicable" << endl;
-        cout << "                                                                                               [ 4 ] Unknown" << endl;
-        cout << "                                                                                               Enter choice: ";
+        cout << "                                                                                                   MENSTRUAL HISTORY:" << endl;
+        cout << "                                                                                                   [ 1 ] Regular" << endl;
+        cout << "                                                                                                   [ 2 ] Irregular" << endl;
+        cout << "                                                                                                   [ 3 ] Not Applicable" << endl;
+        cout << "                                                                                                   [ 4 ] Unknown" << endl;
+        cout << "                                                                                                   Enter choice: ";
         option = readChoice(1, 4);
 
         if (option == 1)
@@ -661,13 +661,13 @@ void patientpersonalinfo(PatientData &patient)
         // GRAVIDA
 
         cout << endl;
-        cout << "                                                                                               GRAVIDA (Number of pregnancies):" << endl;
-        cout << "                                                                                               [ 1 ] 0" << endl;
-        cout << "                                                                                               [ 2 ] 1" << endl;
-        cout << "                                                                                               [ 3 ] 2" << endl;
-        cout << "                                                                                               [ 4 ] 3 or more" << endl;
-        cout << "                                                                                               [ 5 ] Unknown" << endl;
-        cout << "                                                                                               Enter choice: ";
+        cout << "                                                                                                   GRAVIDA (Number of pregnancies):" << endl;
+        cout << "                                                                                                   [ 1 ] 0" << endl;
+        cout << "                                                                                                   [ 2 ] 1" << endl;
+        cout << "                                                                                                   [ 3 ] 2" << endl;
+        cout << "                                                                                                   [ 4 ] 3 or more" << endl;
+        cout << "                                                                                                   [ 5 ] Unknown" << endl;
+        cout << "                                                                                                   Enter choice: ";
         option = readChoice(1, 5);
 
         if (option == 1)
@@ -685,13 +685,13 @@ void patientpersonalinfo(PatientData &patient)
         // PARA
 
         cout << endl;
-        cout << "                                                                                               PARA (Number of living children):" << endl;
-        cout << "                                                                                               [ 1 ] No living children" << endl;
-        cout << "                                                                                               [ 2 ] One living child" << endl;
-        cout << "                                                                                               [ 3 ] Two living children" << endl;
-        cout << "                                                                                               [ 4 ] Three or more living children" << endl;
-        cout << "                                                                                               [ 5 ] Unknown" << endl;
-        cout << "                                                                                               Enter choice: ";
+        cout << "                                                                                                   PARA (Number of living children):" << endl;
+        cout << "                                                                                                   [ 1 ] No living children" << endl;
+        cout << "                                                                                                   [ 2 ] One living child" << endl;
+        cout << "                                                                                                   [ 3 ] Two living children" << endl;
+        cout << "                                                                                                   [ 4 ] Three or more living children" << endl;
+        cout << "                                                                                                   [ 5 ] Unknown" << endl;
+        cout << "                                                                                                   Enter choice: ";
         option = readChoice(1, 5);
 
         if (option == 1)
@@ -709,12 +709,12 @@ void patientpersonalinfo(PatientData &patient)
         // LAST MENSTRUAL PERIOD
 
         cout << endl;
-        cout << "                                                                                               LAST MENSTRUAL PERIOD:" << endl;
-        cout << "                                                                                               [ 1 ] Within the last month" << endl;
-        cout << "                                                                                               [ 2 ] 1-3 months ago" << endl;
-        cout << "                                                                                               [ 3 ] More than 3 months ago" << endl;
-        cout << "                                                                                               [ 4 ] Unknown" << endl;
-        cout << "                                                                                               Enter choice: ";
+        cout << "                                                                                                   LAST MENSTRUAL PERIOD:" << endl;
+        cout << "                                                                                                   [ 1 ] Within the last month" << endl;
+        cout << "                                                                                                   [ 2 ] 1-3 months ago" << endl;
+        cout << "                                                                                                   [ 3 ] More than 3 months ago" << endl;
+        cout << "                                                                                                   [ 4 ] Unknown" << endl;
+        cout << "                                                                                                   Enter choice: ";
         option = readChoice(1, 4);
 
         if (option == 1)
@@ -730,11 +730,11 @@ void patientpersonalinfo(PatientData &patient)
         // MENOPAUSE
 
         cout << endl;
-        cout << "                                                                                               MENOPAUSE (Permanent cessation of menstruation):" << endl;
-        cout << "                                                                                               [ 1 ] Yes" << endl;
-        cout << "                                                                                               [ 2 ] No" << endl;
-        cout << "                                                                                               [ 3 ] Unknown" << endl;
-        cout << "                                                                                               Enter choice: ";
+        cout << "                                                                                                   MENOPAUSE (Permanent cessation of menstruation):" << endl;
+        cout << "                                                                                                   [ 1 ] Yes" << endl;
+        cout << "                                                                                                   [ 2 ] No" << endl;
+        cout << "                                                                                                   [ 3 ] Unknown" << endl;
+        cout << "                                                                                                   Enter choice: ";
         option = readChoice(1, 3);
 
         if (option == 1)
@@ -748,10 +748,10 @@ void patientpersonalinfo(PatientData &patient)
         // OB-GYNE OTHERS
 
         cout << endl;
-        cout << "                                                                                               OTHERS:" << endl;
-        cout << "                                                                                               [ 1 ] Yes" << endl;
-        cout << "                                                                                               [ 2 ] No" << endl;
-        cout << "                                                                                               Enter choice: ";
+        cout << "                                                                                                   OTHERS:" << endl;
+        cout << "                                                                                                   [ 1 ] Yes" << endl;
+        cout << "                                                                                                   [ 2 ] No" << endl;
+        cout << "                                                                                                   Enter choice: ";
         option = readChoice(1, 2);
 
         if (option == 1)

@@ -76,7 +76,7 @@ void patientpersonalinfo(PatientData &patient)
     cout << "                                                                                                   Name of Patient: ";
     getline(cin >> ws, patient.name);
 
-    cout << "                                                                                                   Pogi: ";
+    cout << "                                                                                                   Age: ";
     getline(cin, patient.age);
 
     cout << "                                                                                                   Address: ";

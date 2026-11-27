@@ -6,18 +6,22 @@
 #include "patientdata.h"
 #include "exitprogram.h"
 
+
 using namespace std;
 
 
 void medicodebanner(PatientData &patient)
 {
 
-
     string code;
     int choice;
-
-    cout << "Input USSD: ";
+    
+    cout << "                                                                                           +================================+" << endl;
+    cout << "                                                                                                    Input USSD: ";
     cin >> code;
+    cout << "                                                                                           +================================+" << endl;
+    cout << endl;
+    cout << endl;
 
     if (code == "*206#")
     {
@@ -25,52 +29,49 @@ void medicodebanner(PatientData &patient)
         cout << "\033[1;38;5;88m";
 
 cout << R"(
-
-███╗   ███╗███████╗██████╗ ██╗ ██████╗ ██████╗ ██████╗ ███████╗
-████╗ ████║██╔════╝██╔══██╗██║██╔════╝██╔═══██╗██╔══██╗██╔════╝
-██╔████╔██║█████╗  ██║  ██║██║██║     ██║   ██║██║  ██║█████╗  
-██║╚██╔╝██║██╔══╝  ██║  ██║██║██║     ██║   ██║██║  ██║██╔══╝  
-██║ ╚═╝ ██║███████╗██████╔╝██║╚██████╗╚██████╔╝██████╔╝███████╗
-╚═╝     ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝                                                          
+                                                                            ███╗   ███╗███████╗██████╗ ██╗ ██████╗ ██████╗ ██████╗ ███████╗
+                                                                            ████╗ ████║██╔════╝██╔══██╗██║██╔════╝██╔═══██╗██╔══██╗██╔════╝
+                                                                            ██╔████╔██║█████╗  ██║  ██║██║██║     ██║   ██║██║  ██║█████╗  
+                                                                            ██║╚██╔╝██║██╔══╝  ██║  ██║██║██║     ██║   ██║██║  ██║██╔══╝  
+                                                                            ██║ ╚═╝ ██║███████╗██████╔╝██║╚██████╗╚██████╔╝██████╔╝███████╗
+                                                                            ╚═╝     ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝                                                          
 )" << endl;
 
 cout << "\033[0m";
         cout << "\033[1m";
-        cout << "        A USSD Code for Non-critical Medical Assistance." << endl;
-        cout << "                  MEDICODE USSD CODE: *206#" << endl << endl;
+        cout << "                                                                                   A USSD Code for Non-critical Medical Assistance." << endl;
+        cout << "                                                                                               MEDICODE USSD CODE: *206#" << endl << endl;
         cout << "\033[0m";
 
-        cout << "===============================================================" << endl;
-        cout << "||                        \033[1mDISCLAIMER:\033[0m                        ||" << endl;
-        cout << "===============================================================" << endl;
-        cout << "||                                                           ||" << endl;
-        cout << "||   \033[3mMEDICODE asks questions about your symptoms and\033[0m         ||" << endl;
-        cout << "||   \033[3mconnects you to available General Practitioners (GPs)\033[0m   ||" << endl;
-        cout << "||   \033[3mwho can provide general health guidance.\033[0m                ||" << endl;
-        cout << "||                                                           ||" << endl;
-        cout << "||   \033[3mIt caters only to Green Triage cases, which are\033[0m         ||" << endl;
-        cout << "||   \033[3mgenerally non-emergency conditions that are bearable\033[0m    ||" << endl;
-        cout << "||   \033[3mand can wait for routine medical assessment.\033[0m            ||" << endl;
-        cout << "||                                                           ||" << endl;
-        cout << "||   \033[3mA GP may refer you to a Specialized Practitioner\033[0m        ||" << endl;
-        cout << "||   \033[3mif necessary.\033[0m                                           ||" << endl;
-        cout << "||                                                           ||" << endl;
-        cout << "||   \033[3mMEDICODE does not directly diagnose illnesses or\033[0m        ||" << endl;
-        cout << "||   \033[3mprovide Specialized Practitioner consultations.\033[0m         ||" << endl;
-        cout << "||                                                           ||" << endl;
-        cout << "===============================================================" << endl;
-        
-        cout << "1. Proceed" << endl;
-        cout << "2. No" << endl;
-
-        cout << endl;
-        cout << "Enter your choice: ";
+        cout << "                                                                           +=============================================================+" << endl;
+        cout << "                                                                           ||                        \033[1mDISCLAIMER:\033[0m                        ||" << endl;
+        cout << "                                                                           +=============================================================+" << endl;
+        cout << "                                                                           ||                                                           ||" << endl;
+        cout << "                                                                           ||   \033[3mMEDICODE asks questions about your symptoms and\033[0m         ||" << endl;
+        cout << "                                                                           ||   \033[3mconnects you to available General Practitioners (GPs)\033[0m   ||" << endl;
+        cout << "                                                                           ||   \033[3mwho can provide general health guidance.\033[0m                ||" << endl;
+        cout << "                                                                           ||                                                           ||" << endl;
+        cout << "                                                                           ||   \033[3mIt caters only to Green Triage cases, which are\033[0m         ||" << endl;
+        cout << "                                                                           ||   \033[3mgenerally non-emergency conditions that are bearable\033[0m    ||" << endl;
+        cout << "                                                                           ||   \033[3mand can wait for routine medical assessment.\033[0m            ||" << endl;
+        cout << "                                                                           ||                                                           ||" << endl;
+        cout << "                                                                           ||   \033[3mA GP may refer you to a Specialized Practitioner\033[0m        ||" << endl;
+        cout << "                                                                           ||   \033[3mif necessary.\033[0m                                           ||" << endl;
+        cout << "                                                                           ||                                                           ||" << endl;
+        cout << "                                                                           ||   \033[3mMEDICODE does not directly diagnose illnesses or\033[0m        ||" << endl;
+        cout << "                                                                           ||   \033[3mprovide Specialized Practitioner consultations.\033[0m         ||" << endl;
+        cout << "                                                                           ||                                                           ||" << endl;
+        cout << "                                                                           +=============================================================+" << endl;
+        cout << "                                                                           ||                        [ 1 ] Proceed                      ||" << endl;
+        cout << "                                                                           ||                        [ 2 ] No                           ||" << endl;
+        cout << "                                                                           +=============================================================+" << endl;
+        cout << "                                                                                                  Enter your choice: ";
         cin >> choice;
         cout << endl;
 
         if (choice == 1)
         {
-            cout << "Proceeding to Patient Consent Form..." << endl;
+            cout << "                                                                                           Proceeding to Patient Consent Form..." << endl;
             patientconsent(patient);
         }
         else if (choice == 2)
@@ -79,12 +80,12 @@ cout << "\033[0m";
         }
         else
         {
-            cout << "Please choose either 1 or 2." << endl;
+            cout << "                                                                                              Please choose either 1 or 2." << endl;
         }
     }
     else
     {
-        cout << "USSD Invalid. Please Try Again." << endl;
+        cout << "                                                                                             USSD Invalid. Please Try Again." << endl;
     }
 
 }

@@ -61,29 +61,34 @@ void patientpersonalinfo(PatientData &patient)
     // I. GENERAL DATA
 
     cout << endl;
-    cout << "=============================================" << endl;
-    cout << "||          PATIENT'S INFORMATION          ||" << endl;
-    cout << "=============================================" << endl;
+    cout << "                                                                           +=============================================================+" << endl;
+    cout << "                                                                           ||                  \033[1mPATIENT'S INFORMATION\033[0m                    ||" << endl; 
+    cout << "                                                                           +=============================================================+" << endl;
 
     cout << endl;
-    cout << "USER ID AND INFORMATION" << endl;
-    cout << "Patient ID: " << patient.patientID << endl;
+    cout << "                                                                                                   USER ID AND INFORMATION" << endl;
+    cout << "                                                                                                   Patient ID: " << patient.patientID << endl;
 
 
     cout << endl;
-    cout << "I. GENERAL DATA" << endl;
+    cout << "                                                                                       I. GENERAL DATA" << endl;
 
-    cout << "Name of Patient: ";
+    cout << "                                                                                                   Name of Patient: ";
     getline(cin >> ws, patient.name);
 
-    cout << "Age: ";
+    cout << "                                                                                                   Age: ";
     getline(cin, patient.age);
 
-    cout << endl;
-    cout << "Sex:" << endl;
-    cout << "1. Male" << endl;
-    cout << "2. Female" << endl;
-    cout << "Enter choice: ";
+    cout << "                                                                                                   Address: ";
+    getline(cin, patient.address);
+
+    cout << "                                                                                                   Civil Status: ";
+    getline(cin, patient.civilStatus);
+
+    cout << "                                                                                                   Sex:" << endl;
+    cout << "                                                                                                   [ 1 ] Male" << endl;
+    cout << "                                                                                                   [ 2 ] Female" << endl;
+    cout << "                                                                                                   Enter choice: ";
     cin >> sexChoice;
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -101,31 +106,24 @@ void patientpersonalinfo(PatientData &patient)
         patient.sexChoice = "Not Specified";
     }
 
-    cout << "Address: ";
-    getline(cin, patient.address);
-
-    cout << "Civil Status: ";
-    getline(cin, patient.civilStatus);
-
-
     // II. HISTORY OF PRESENT ILLNESS
 
     cout << endl;
-    cout << "II. HISTORY OF PRESENT ILLNESS" << endl;
-    cout << "Chief Complaint:" << endl;
+    cout << "                                                                                       II. HISTORY OF PRESENT ILLNESS" << endl;
+    cout << endl;
+    cout << "                                                                                                   Chief Complaint:" << endl;
 
     patient.historyPresentIllness.clear();
     count = 0;
 
     do
     {
-        cout << endl;
-        cout << "1. Fever" << endl;
-        cout << "2. Coughing/Cold" << endl;
-        cout << "3. Pain/Ache" << endl;
-        cout << "4. Dizziness/Fatigue" << endl;
-        cout << "5. Others" << endl;
-        cout << "Enter choice: ";
+        cout << "                                                                                                   [ 1 ] Fever" << endl;
+        cout << "                                                                                                   [ 2 ] Coughing/Cold" << endl;
+        cout << "                                                                                                   [ 3 ] Pain/Ache" << endl;
+        cout << "                                                                                                   [ 4 ] Dizziness/Fatigue" << endl;
+        cout << "                                                                                                   [ 5 ] Others" << endl;
+        cout << "                                                                                                   Enter choice: ";
         cin >> option;
 
         item = "";
@@ -137,7 +135,7 @@ void patientpersonalinfo(PatientData &patient)
         else if (option == 5)
         {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Please specify: ";
+            cout << "                                                                                           Please specify: ";
             getline(cin, item);
         }
 
@@ -152,34 +150,34 @@ void patientpersonalinfo(PatientData &patient)
         }
         else if (option < 1 || option > 5)
         {
-            cout << "Invalid choice." << endl;
+            cout << "                                                                                           Invalid choice." << endl;
         }
 
         cout << endl;
-        cout << "Add another? (1. Yes, 2. No): ";
+        cout << "                                                                                                   Add another? (1. Yes, 2. No): ";
         cin >> moreChoice;
     }
     while (moreChoice == 1);
 
     if (patient.historyPresentIllness.empty())
     {
-        patient.historyPresentIllness = "Not Specified";
+        patient.historyPresentIllness = "                                                                       Not Specified";
     }
 
     // III. PAST MEDICAL HISTORY
 
     cout << endl;
-    cout << "III. PAST MEDICAL HISTORY" << endl;
+    cout << "                                                                                       III. PAST MEDICAL HISTORY" << endl;
 
 
     // OPERATIONS
 
     cout << endl;
-    cout << "OPERATIONS:" << endl;
-    cout << "1. Yes" << endl;
-    cout << "2. No" << endl;
-    cout << "3. Unknown" << endl;
-    cout << "Enter choice: ";
+    cout << "                                                                                                   OPERATIONS:" << endl;
+    cout << "                                                                                                   [ 1 ] Yes" << endl;
+    cout << "                                                                                                   [ 2 ] No" << endl;
+    cout << "                                                                                                   [ 3 ] Unknown" << endl;
+    cout << "                                                                                                   Enter choice: ";
     cin >> option;
 
     if (option == 1)
@@ -190,38 +188,38 @@ void patientpersonalinfo(PatientData &patient)
     }
     else if (option == 2)
     {
-        patient.operations = "No";
+        patient.operations = "                                                                                      No";
     }
     else if (option == 3)
     {
-        patient.operations = "Unknown";
+        patient.operations = "                                                                                  Unknown";
     }
     else
     {
-        patient.operations = "Not Specified";
+        patient.operations = "                                                                                  Not Specified";
     }
 
 
     // IMMUNIZATIONS
 
     cout << endl;
-    cout << "IMMUNIZATIONS:" << endl;
-    cout << "1. Complete" << endl;
-    cout << "2. Incomplete" << endl;
-    cout << "3. Unknown" << endl;
-    cout << "Enter choice: ";
+    cout << "                                                                                                   IMMUNIZATIONS:" << endl;
+    cout << "                                                                                                   [ 1 ] Complete" << endl;
+    cout << "                                                                                                   [ 2 ] Incomplete" << endl;
+    cout << "                                                                                                   [ 3 ] Unknown" << endl;
+    cout << "                                                                                                   Enter choice: ";
     cin >> option;
 
     if (option == 1)
     {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Please specify: ";
+        cout << "                                                                                                   Please specify: ";
         getline(cin, patient.immunizations);
     }
     else if (option == 2)
     {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Please specify what immunizations are incomplete: ";
+        cout << "                                                                                                   Please specify what immunizations are incomplete: ";
         getline(cin, patient.immunizations);
     }
     else if (option == 3)
@@ -237,11 +235,11 @@ void patientpersonalinfo(PatientData &patient)
     // ALLERGIES
 
     cout << endl;
-    cout << "ALLERGIES:" << endl;
-    cout << "1. Yes" << endl;
-    cout << "2. No" << endl;
-    cout << "3. Unknown" << endl;
-    cout << "Enter choice: ";
+    cout << "                                                                                                   ALLERGIES:" << endl;
+    cout << "                                                                                                   [ 1 ] Yes" << endl;
+    cout << "                                                                                                   [ 2 ] No" << endl;
+    cout << "                                                                                                   [ 3 ] Unknown" << endl;
+    cout << "                                                                                                   Enter choice: ";
     cin >> option;
 
     if (option == 1)

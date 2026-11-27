@@ -20,14 +20,14 @@ void healthcarefacility()
 
     cout << endl;
     cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-    cout << "                                                                               \033[31m||\033[0m                   CHOOSE A HEALTHCARE FACILITY              \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                CHOOSE A HEALTHCARE FACILITY                \033[31m||\033[0m" << endl;
     cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-    cout << "                                                                               \033[31m||\033[0m               [ 1 ] Public Hospital                       \033[31m||\033[0m" << endl;
-    cout << "                                                                               \033[31m||\033[0m               [ 2 ] Private Hospital                      \033[31m||\033[0m" << endl;
-    cout << "                                                                               \033[31m||\033[0m               [ 3 ] Back to Main Menu                     \033[31m||\033[0m" << endl;
-    cout << "                                                                               \033[31m||\033[0m               [ 4 ] Exit                                  \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                   [ 1 ] Public Hospital                    \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                   [ 2 ] Private Hospital                   \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                   [ 3 ] Back to Main Menu                  \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                   [ 4 ] Exit                               \033[31m||\033[0m" << endl;
     cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-    cout << "                                                                                                   Enter your choice: ";
+    cout << "                                                                                                    Enter your choice: ";
     cin >> facilityChoice;
 
 
@@ -37,13 +37,13 @@ void healthcarefacility()
     {
         cout << endl;
         cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m               AVAILABLE PUBLIC DOCTORS                    \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   AVAILABLE PUBLIC DOCTORS                 \033[31m||\033[0m" << endl;
         cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m              [ 1 ] Dr. Adrian Villanueva                   \033[31m||\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m              [ 2 ] Dr. Marcus Javier                       \033[31m||\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m              [ 3 ] Dr. Nathaniel Cruz                      \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 1 ] Dr. Adrian Villanueva              \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 2 ] Dr. Marcus Javier                  \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 3 ] Dr. Nathaniel Cruz                 \033[31m||\033[0m" << endl;
         cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-        cout << "                                                                                                   Select Doctor: ";
+        cout << "                                                                                                       Select Doctor: ";
         cin >> doctorChoice;
 
         switch (doctorChoice)
@@ -93,13 +93,13 @@ void healthcarefacility()
     {
         cout << endl;
        cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m                AVAILABLE PRIVATE DOCTORS             \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   AVAILABLE PRIVATE DOCTORS                \033[31m||\033[0m" << endl;
         cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m                   [ 1 ] Dr. Daniel Santiagp                   \033[31m||\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m                   [ 2 ] Dr. Matthew Alcantara                  \033[31m||\033[0m" << endl;
-        cout << "                                                                               \033[31m||\033[0m                   [ 3 ] Dr. Gabriel Mendoza                 \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 1 ] Dr. Daniel Santiagp                \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 2 ] Dr. Matthew Alcantara              \033[31m||\033[0m" << endl;
+        cout << "                                                                               \033[31m||\033[0m                   [ 3 ] Dr. Gabriel Mendoza                \033[31m||\033[0m" << endl;
         cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-        cout << "                                                                                                           Select Doctor: ";
+        cout << "                                                                                                       Select Doctor: ";
         cin >> doctorChoice;
 
         switch (doctorChoice)
@@ -142,7 +142,7 @@ void healthcarefacility()
 
             default:
 
-                cout << "Invalid doctor selection!" << endl;
+                cout << "                                                                                       Invalid doctor selection!" << endl;
 
                 return;
         }
@@ -154,7 +154,7 @@ void healthcarefacility()
     else if (facilityChoice == 3)
     {
         cout << endl;
-        cout << "Returning to Main Menu..." << endl;
+        cout << "                                                                                               Returning to Main Menu..." << endl;
 
         return;
     }
@@ -165,7 +165,7 @@ void healthcarefacility()
     else if (facilityChoice == 4)
     {
         cout << endl;
-        cout << "Exiting the program..." << endl;
+        cout << "                                                                                               Exiting the program..." << endl;
         exitprogram();
     
     }
@@ -175,7 +175,7 @@ void healthcarefacility()
 
     else
     {
-        cout << "Invalid selection!" << endl;
+        cout << "                                                                                               Invalid selection!" << endl;
 
         return;
     }
@@ -184,21 +184,21 @@ void healthcarefacility()
     // SELECTED DOCTOR
 
     cout << endl;
-    cout << "\033[31m==============================================================================\033[0m" << endl;
-    cout << "\033[31m||\033[0m                    Selected Doctor!                                     \033[31m||\033[0m" << endl;
-    cout << "\033[31m==============================================================================\033[0m" << endl;
-    cout << "\033[31m||\033[0m Doctor's Contact Number: |  " << number << endl;
-    cout << "\033[31m||\033[0m Doctor's Location:       |  " << location << endl;
-    cout << "\033[31m||\033[0m Consultation Fee:        |  " << fee << endl;
-    cout << "\033[31m||\033[0m Days of Availability:    |  " << day << endl;
-    cout << "\033[31m||\033[0m Time of Availability:    |  " << time << endl;
-    cout << "\033[31m==============================================================================\033[0m" << endl;
+    cout << "                                                                       \033[31m+============================================================================+\033[0m" << endl;
+    cout << "                                                                       \033[31m||\033[0m                               Selected Doctor!                           \033[31m||\033[0m" << endl;
+    cout << "                                                                       \033[31m+============================================================================+\033[0m" << endl;
+    cout << "                                                                       \033[31m||\033[0m Doctor's Contact Number: |  " << number << endl;
+    cout << "                                                                       \033[31m||\033[0m Doctor's Location:       |  " << location << endl;
+    cout << "                                                                       \033[31m||\033[0m Consultation Fee:        |  " << fee << endl;
+    cout << "                                                                       \033[31m||\033[0m Days of Availability:    |  " << day << endl;
+    cout << "                                                                       \033[31m||\033[0m Time of Availability:    |  " << time << endl;
+    cout << "                                                                       \033[31m+============================================================================+\033[0m" << endl;
     cout << endl;
 
 
     // WIRELESS PHONE DIALER
 
-    cout << "Opening phone dialer..." << endl;
+    cout << "                                                                                                       Opening phone dialer..." << endl;
 
     string device = "adb-RF8WC00XQHP-cR6WsD._adb-tls-connect._tcp";
 
@@ -213,12 +213,12 @@ void healthcarefacility()
 
     if (result == 0)
     {
-        cout << "ADB command executed." << endl;
+        cout << "                                                                                                      ADB command executed." << endl;
     }
     else
     {
-        cout << "Failed to open phone dialer." << endl;
-        cout << "Check your wireless ADB connection." << endl;
+        cout << "                                                                                                   Failed to open phone dialer." << endl;
+        cout << "                                                                                               Check your wireless ADB connection." << endl;
     }
 
     cout << endl;

@@ -55,7 +55,7 @@ void mainmenu(PatientData &patient, SymptomData &symptoms)
                 break;
             }
 
-            case 4:
+            case 3:
             {
                 exitprogram();
                 break;

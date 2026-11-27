@@ -14,7 +14,10 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
 {
  int nextChoice;
 
-
+ // Added a loop to make it come back to the healthcare menu after displaying the symptom summary
+ while(true){
+ 
+    
     cout << "                                                                               +==============================================================+" << endl;
     cout << "                                                                               ||                   HEALTHCARE ASSISTANCE                    ||"<< endl;
     cout << "                                                                               +==============================================================+" << endl;
@@ -24,18 +27,6 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
     cout << "                                                                               ||     [ 4 ] Exit                                             ||" << endl;
     cout << "                                                                               +==============================================================+" << endl;
    
- // Added a loop to make it come back to the healthcare menu after displaying the symptom summary
- while(true){
- 
-    cout << "\n========================================\n";
-    cout << "           HEALTHCARE ASSISTANCE          \n";
-    cout << "========================================\n";
-    cout << "1. View Symptom Summary\n";
-    cout << "2. Connect to an Available General Practitioner\n";
-    cout << "3. Back to Main Menu\n";
-    cout << "4. Exit\n";
-    cout << "Enter your choice: ";
-
     cin >> nextChoice;
 
 
@@ -58,7 +49,7 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
     else if (nextChoice == 4)
     {
         exitprogram();
-        return;
+        break;
     }
   }
 }

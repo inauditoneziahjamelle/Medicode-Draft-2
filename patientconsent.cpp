@@ -1,10 +1,10 @@
+
 #include <iostream>
 #include <limits>
 #include "patientconsent.h"
 #include "exitprogram.h"
 #include "patientpersonalinfo.h"
-#include "patientdata.h" 
-
+#include "patientdata.h"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ void patientconsent(PatientData &patient)
 
     cout << endl;
     cout << "                                                                           +=============================================================+" << endl;
-    cout << "                                                                           ||                      \033[1mPATIENT CONSENT\033[0m                      ||" << endl; 
+    cout << "                                                                           ||  \033[0m                    \033[1mPATIENT CONSENT\033[0m                       ||" << endl;
     cout << "                                                                           +=============================================================+" << endl;
     cout << "                                                                           ||                                                           ||" << endl;
     cout << "                                                                           ||      \033[3mBy using MEDICODE, your personal and medical\033[0m         ||" << endl;
@@ -25,8 +25,9 @@ void patientconsent(PatientData &patient)
     cout << "                                                                           ||                        [ 1 ] Agree                        ||" << endl;
     cout << "                                                                           ||                        [ 2 ] Disagree                     ||" << endl;
     cout << "                                                                           +=============================================================+" << endl;
-    cout << "                                                                                                  Enter your choice: ";    
-                                                                                                               cin >> choice;
+    cout << "                                                                                                  Enter your choice: ";
+
+    cin >> choice;
 
     if (cin.fail())
     {
@@ -45,16 +46,16 @@ void patientconsent(PatientData &patient)
     if (choice == 1)
     {
         cout << "                                                                                   Please input here your personal information." << endl;
-        patientpersonalinfo (patient);
-        return; 
+        patientpersonalinfo(patient);
+        return;
     }
-    
+
     else if (choice == 2)
     {
         cout << "                                                                                   Consent was not provided. MEDICODE will now close." << endl;
         exitprogram();
 
-    return;
+        return;
     }
     else
     {

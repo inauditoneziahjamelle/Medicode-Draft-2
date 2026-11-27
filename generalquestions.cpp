@@ -373,7 +373,9 @@ void displaySymptomSummary(const SymptomData &symptomData)
         cout << "Seek immediate professional medical assistance.\n";
         cout << "Do not wait for an automated consultation.\n";
     }
+   
 }
+
 
 
 bool generalquestions(PatientData &patient,SymptomData &symptomData)

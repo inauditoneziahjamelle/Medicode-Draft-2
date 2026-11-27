@@ -14,6 +14,7 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
 {
  int nextChoice;
 
+
     cout << "                                                                               +==============================================================+" << endl;
     cout << "                                                                               ||                   HEALTHCARE ASSISTANCE                    ||"<< endl;
     cout << "                                                                               +==============================================================+" << endl;
@@ -23,13 +24,27 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
     cout << "                                                                               ||     [ 4 ] Exit                                             ||" << endl;
     cout << "                                                                               +==============================================================+" << endl;
     cout << "                                                                                                    Enter your choice: ";
+
+ // Added a loop to make it come back to the healthcare menu after displaying the symptom summary
+ while(true){
+ 
+    cout << "\n========================================\n";
+    cout << "           HEALTHCARE ASSISTANCE          \n";
+    cout << "========================================\n";
+    cout << "1. View Symptom Summary\n";
+    cout << "2. Connect to an Available General Practitioner\n";
+    cout << "3. Back to Main Menu\n";
+    cout << "4. Exit\n";
+    cout << "Enter your choice: ";
+
     cin >> nextChoice;
 
-    if (nextChoice == 1)
-    {
-        displaySymptomSummary(symptomData);
-        return;
-    }
+
+           if (nextChoice == 1)
+        {
+            displaySymptomSummary(symptomData);
+            // Removed return here so it loops back to the Healthcare Assistance menu
+        }
     else if (nextChoice == 2)
     {
         cout << "                                                                               Connecting to an Available General Practitioner...\n";
@@ -46,5 +61,5 @@ void healthcare(PatientData &patient,SymptomData &symptomData)
         exitprogram();
         return;
     }
-    
+  }
 }

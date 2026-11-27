@@ -65,8 +65,8 @@ void patientpersonalinfo(PatientData &patient)
     cout << "                                                                           +=============================================================+" << endl;
 
     cout << endl;
-    cout << "                                                                                                   USER ID AND INFORMATION" << endl;
-    cout << "                                                                                                   Patient ID: " << patient.patientID << endl;
+    cout << "                                                                                               USER ID AND INFORMATION" << endl;
+    cout << "                                                                                               Patient ID: " << patient.patientID << endl;
 
 
     cout << endl;

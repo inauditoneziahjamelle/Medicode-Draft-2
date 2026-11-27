@@ -6,10 +6,10 @@ using namespace std;
 void exitprogram()
 {
     cout << endl;
-    cout << "                                                                           +==============================================================+" << endl;
-    cout << "                                                                           ||                                                            ||" << endl;
-    cout << "                                                                           ||  MEDICODE - Quick Care, For A More Convenient Healthcare!  ||" << endl;
-    cout << "                                                                           ||                Thank you for using MEDICODE.               ||" << endl;
-    cout << "                                                                           ||                                                            ||" << endl;
-    cout << "                                                                           +==============================================================+" << endl;
+    cout << "\033[31m                                                                           +==============================================================+\033[0m" << endl;
+    cout << "\033[31m                                                                           ||\033[0m                                                            \033[31m||\033[0m" << endl;
+    cout << "\033[31m                                                                           ||\033[0m  MEDICODE - Quick Care, For A More Convenient Healthcare!  \033[31m||\033[0m" << endl;
+    cout << "\033[31m                                                                           ||\033[0m                Thank you for using MEDICODE.               \033[31m||\033[0m" << endl;
+    cout << "\033[31m                                                                           ||\033[0m                                                            \033[31m||\033[0m" << endl;
+    cout << "\033[31m                                                                           +==============================================================+\033[0m" << endl;
 }

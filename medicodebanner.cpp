@@ -96,6 +96,7 @@ cout << R"(
     else
     {
         cout << "                                                                                             USSD Invalid. Please Try Again." << endl;
+        return;
     }
 
 }

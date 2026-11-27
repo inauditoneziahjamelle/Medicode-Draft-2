@@ -2,4 +2,4 @@
 
 #include "patientdata.h"
 
-void updatePatientInformation(PatientData &patient);
+void updatePatientInformation(PatientData &patient, SymptomData &symptomData);

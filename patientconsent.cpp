@@ -1,8 +1,10 @@
 #include <iostream>
+#include <limits>
 #include "patientconsent.h"
 #include "exitprogram.h"
 #include "patientpersonalinfo.h"
 #include "patientdata.h" 
+
 
 using namespace std;
 
@@ -23,8 +25,19 @@ void patientconsent(PatientData &patient)
     cout << "                                                                           ||                        [ 1 ] Agree                        ||" << endl;
     cout << "                                                                           ||                        [ 2 ] Disagree                     ||" << endl;
     cout << "                                                                           +=============================================================+" << endl;
-    cout << "                                                                                                  Enter your choice: ";
-    cin >> choice;
+    cout << "                                                                                                  Enter your choice: ";    
+                                                                                                               cin >> choice;
+
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid choice. Please enter 1 or 2." << endl;
+        patientconsent(patient);
+        return;
+    }
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << endl;
 
     cout << "                                                                           +=============================================================+" << endl;

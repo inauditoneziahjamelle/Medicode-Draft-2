@@ -43,7 +43,7 @@ void patientprofile(PatientData &patient, SymptomData &symptomData)
     {
         case 1: //update personal info
             {
-                updatePatientInformation(patient);
+                updatePatientInformation(patient, symptomData);
                 break; 
             }
 

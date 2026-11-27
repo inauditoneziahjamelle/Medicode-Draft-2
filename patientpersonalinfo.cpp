@@ -4,7 +4,7 @@
 #include <string>
 #include <set>
 #include <stdexcept>
-
+#include <windows.h>
 #include "patientpersonalinfo.h"
 #include "patientdata.h"
 #include "mainmenu.h"
@@ -12,63 +12,86 @@
 using namespace std;
 
 // VALIDATES REQUIRED TEXT INPUT
+
 string readRequiredText()
 {
     string input;
+    string indent = "                                                                                                   ";
 
     while (true)
     {
-        try
+         getline(cin, input);
+
+        if (input.find_first_not_of(" \t") == string::npos)
         {
-            getline(cin, input);
-
-            if (input.find_first_not_of(" \\t") == string::npos)
-            {
-                throw invalid_argument("You need to fill this up!");
-            }
-
-            return input;
+            cout << endl;
+            cout << indent << "\033[3;31mYou need to fill this up!\033[0m" << endl;
+            cout << indent << "Please enter the information: ";
         }
-        catch (const exception& e)
+        else
         {
-            cout << "\\033[3;31m" << e.what() << "\\033[0m" << endl;
-            cout << "Please enter the information: ";
+            return input;
         }
     }
 }
 
-// VALIDATES NUMERIC MENU INPUT
+
+
+
 int readChoice(int minimum, int maximum)
 {
     string input;
+    string indent = "                                                                                                   ";
 
     while (true)
     {
+        getline(cin, input);
+
+        if (input.find_first_not_of(" \t") == string::npos)
+        {
+            cout << indent << "\033[3;31mInput missing!\033[0m" << endl;
+            cout << indent<< "Please enter your choice: ";
+            continue;
+        }
+
+        size_t position = 0;
+        int value;
+
         try
         {
-            getline(cin >> ws, input);
-
-            size_t position = 0;
-            int value = stoi(input, &position);
-
-            if (position != input.length())
-            {
-                throw invalid_argument("Please enter a number only.");
-            }
-
-            if (value < minimum || value > maximum)
-            {
-                throw out_of_range("Invalid choice.");
-            }
-
-            return value;
+            value = stoi(input, &position);
         }
-        catch (const exception& e)
+        catch (const invalid_argument&)
         {
-            cout << e.what() << " Please try again." << endl;
+                                cout << indent << "\033[3;31mPlease enter a number only.\033[0m" << endl;
+                                cout << indent << "Please enter your choice: ";
+            continue;
         }
+        catch (const out_of_range&)
+        {
+            cout << indent << "\033[3;31mNumber is out of range.\033[0m" << endl;
+            cout << indent << "Please enter your choice: ";
+            continue;
+        }
+
+        if (position != input.length())
+        {
+            cout << indent << "\033[3;31mPlease enter a number only.\033[0m" << endl;
+            cout << indent << "Please enter your choice: ";
+            continue;
+        }
+
+        if (value < minimum || value > maximum)
+        {
+            cout << indent << "\033[3;31mInvalid choice.\033[0m" << endl;
+            cout << indent << "Please enter your choice: ";
+            continue;
+        }
+
+        return value;
     }
 }
+
 
 
 // STORES GENERATED PATIENT IDS
@@ -100,6 +123,7 @@ string generatePatientID()
 // PATIENT PERSONAL INFORMATION
 void patientpersonalinfo(PatientData &patient)
 {
+    SetConsoleOutputCP(CP_UTF8);
     int choice;
     int sexChoice;
     int option;

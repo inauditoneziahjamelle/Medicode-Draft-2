@@ -7,6 +7,7 @@
 #include "patientconsent.h"
 #include "patientpersonalinfo.h"
 #include "generalquestions.h"
+#include "patientprofile.h"
 #include "hc.h"
 #include <string>
 #include <cstdio>

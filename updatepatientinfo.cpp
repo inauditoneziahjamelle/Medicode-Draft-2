@@ -2,11 +2,14 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include "symptomdata.h"
+#include "patientdata.h"
 #include "updatepatientinfo.h"
+#include "patientprofile.h"
 
 using namespace std;
 
-void updatePatientInformation(PatientData &patient)
+void updatePatientInformation(PatientData &patient, SymptomData &symptomData)
 {
     int choice;
 
@@ -82,6 +85,7 @@ void updatePatientInformation(PatientData &patient)
 
             case 7:
                 cout << "\nReturning...\n";
+                patientprofile(patient, symptomData);
                 return;
 
             default:

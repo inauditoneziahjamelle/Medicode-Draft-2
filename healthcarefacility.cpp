@@ -20,7 +20,7 @@ void healthcarefacility()
 
     cout << endl;
     cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
-    cout << "                                                                               \033[31m||\033[0m                   CHOOSE A HEALTHCARE FACILITY             \033[31m||\033[0m" << endl;
+    cout << "                                                                               \033[31m||\033[0m                   CHOOSE A HEALTHCARE FACILITY              \033[31m||\033[0m" << endl;
     cout << "                                                                               \033[31m+==============================================================+\033[0m" << endl;
     cout << "                                                                               \033[31m||\033[0m               [ 1 ] Public Hospital                       \033[31m||\033[0m" << endl;
     cout << "                                                                               \033[31m||\033[0m               [ 2 ] Private Hospital                      \033[31m||\033[0m" << endl;

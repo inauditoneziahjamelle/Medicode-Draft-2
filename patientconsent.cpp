@@ -18,7 +18,7 @@ void patientconsent(PatientData &patient)
     cout << "                                                                           ||  \033[0m                    \033[1mPATIENT CONSENT\033[0m                      ||" << endl;
     cout << "                                                                           +=============================================================+" << endl;
     cout << "                                                                           ||                                                           ||" << endl;
-    cout << "                                                                           ||      \033[3mBy using MEDICODE, your personal and medical\033[0m         ||" << endl;
+    cout << "                                                                           ||     \033[3mBy using MEDICODE, your personal and medical\033[0m          ||" << endl;
     cout << "                                                                           ||     \033[3minformation will be collected to help provide\033[0m         ||" << endl;
     cout << "                                                                           ||     \033[3mhealthcare navigation and connect you with a GP.\033[0m      ||" << endl;
     cout << "                                                                           ||                                                           ||" << endl;
@@ -26,7 +26,7 @@ void patientconsent(PatientData &patient)
     cout << "                                                                           ||                        [ 1 ] Agree                        ||" << endl;
     cout << "                                                                           ||                        [ 2 ] Disagree                     ||" << endl;
     cout << "                                                                           +=============================================================+" << endl;
-    cout << "                                                                                                  Enter your choice: ";
+    cout << "                                                                                                   Enter your choice: ";
 
     cin >> choice;
 

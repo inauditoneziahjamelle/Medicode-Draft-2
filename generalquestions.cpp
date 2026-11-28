@@ -20,14 +20,14 @@ int readChoice(int minimum, int maximum);
 
 
 // ============================================================
-// MEDICODE QUESTION GUI
+//                    MEDICODE QUESTION GUI
 // ============================================================
 
 
 
 
 // ============================================================
-// QUESTION 1 - DURATION
+//                      QUESTION 1 - DURATION
 // ============================================================
 
 bool genquesnum1(PatientData &patient, SymptomData &symptomData)
@@ -44,7 +44,6 @@ bool genquesnum1(PatientData &patient, SymptomData &symptomData)
         "[ 5 ] Back to Main Menu"
     });
 
-    cout << "Enter your choice: ";
     choice = readChoice(1, 5);
 
     if (choice == 1)
@@ -95,7 +94,6 @@ bool genquesnum2(PatientData &patient, SymptomData &symptomData)
         "[ 5 ] Back to Main Menu"
     });
 
-    cout << "Enter your choice: ";
     choice = readChoice(1, 5);
 
     if (choice == 1)
@@ -151,7 +149,6 @@ bool genquesnum3(PatientData &patient, SymptomData &symptomData)
         "[ 6 ] Back to Main Menu"
     });
 
-    cout << "Enter your choice: ";
     choice = readChoice(1, 6);
 
     if (choice == 1)
@@ -212,7 +209,6 @@ bool genquesnum4(PatientData &patient, SymptomData &symptomData)
         "[ 6 ] Back to Main Menu"
     });
 
-    cout << "Enter your choice: ";
     choice = readChoice(1, 6);
 
     if (choice == 1)
@@ -271,7 +267,6 @@ bool genquesnum5(PatientData &patient, SymptomData &symptomData)
         "[ 4 ] Back to Main Menu"
     });
 
-    cout << "Enter your choice: ";
     choice = readChoice(1, 4);
 
     if (choice == 1)
@@ -332,7 +327,6 @@ bool genquesnum6(PatientData &patient, SymptomData &symptomData)
             "[ 8 ] Back to Main Menu"
         });
 
-        cout << "Enter your choice: ";
         choice = readChoice(1, 8);
 
         if (choice >= 1 && choice <= 5)
@@ -435,7 +429,6 @@ bool genquesnum7(PatientData &patient, SymptomData &symptomData)
         "[ 5 ] Back to Main Menu"
     });
 
-    cout << "Enter your choice: ";
     choice = readChoice(1, 5);
 
     if (choice == 1)
@@ -489,7 +482,6 @@ bool genquesnum8(PatientData &patient, SymptomData &symptomData)
         "[ 4 ] Back to Main Menu"
     });
 
-    cout << "Enter your choice: ";
     choice = readChoice(1, 4);
 
     if (choice == 1)

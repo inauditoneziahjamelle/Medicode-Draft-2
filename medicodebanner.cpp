@@ -18,7 +18,7 @@ bool medicodebanner(PatientData& patient, SymptomData &symptomData)
     int choice;
     
     cout << "                                                                                            +================================+" << endl;
-    cout << "                                                                                                   Input USSD: ";
+    cout << "                                                                                                      Input USSD: ";
     cin >> code;
     cout << "                                                                                            +================================+" << endl;
     cout << endl;

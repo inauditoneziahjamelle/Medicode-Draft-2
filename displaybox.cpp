@@ -9,11 +9,10 @@ using namespace std;
 
 void displayQuestionBox(const string& title, const vector<string>& options)
 {
-    const int width = 96;
-    const int consoleWidth = 150;
-    const int consoleHeight = 40;
+    const int width = 59;
+    const int consoleWidth = 70;
 
-    int leftPadding = (consoleWidth - width - 2) / 2;
+    int leftPadding = (consoleWidth - width - 2) / 2 + 71;
 
     if (leftPadding < 0)
     {
@@ -22,36 +21,43 @@ void displayQuestionBox(const string& title, const vector<string>& options)
 
     string padding(leftPadding, ' ');
 
-    int boxHeight = options.size() + 4;
+    // SMALL VERTICAL SPACING
+    cout << endl;
 
-    int topPadding = (consoleHeight - boxHeight) / 2;
+    // TOP BORDER
+    cout << padding << "+" << string(width + 2, '=') << "+" << endl;
 
-    if (topPadding < 0)
-    {
-        topPadding = 0;
-    }
+    // CENTERED TITLE
+    int titlePadding = (width - title.length()) / 2;
 
-    for (int i = 0; i < topPadding; i++)
-    {
-        cout << endl;
-    }
+    cout << padding << "||"
+         << string(titlePadding, ' ')
+         << title
+         << string(width - titlePadding - title.length(), ' ')
+         << "||" << endl;
 
-    cout << padding << "+" << string(width, '=') << "+" << endl;
+    // TITLE BOTTOM BORDER
+    cout << padding << "+" << string(width + 2, '=') << "+" << endl;
 
-    cout << padding << "|"
-         << setw(width) << left << ("  " + title)
-         << "|" << endl;
-
-    cout << padding << "+" << string(width, '=') << "+" << endl;
-
+    // OPTIONS
     for (const string& option : options)
     {
-        cout << padding << "|"
+        cout << padding << "||"
              << setw(width) << left << ("  " + option)
-             << "|" << endl;
+             << "||" << endl;
     }
 
-    cout << padding << "+" << string(width, '=') << "+" << endl;
+    // BOTTOM BORDER
+    cout << padding << "+" << string(width + 2, '=') << "+" << endl;
+
+    // INPUT PROMPT
+    string prompt = "Enter your choice: ";
+
+    int promptPadding = (width + 4 - prompt.length()) / 2;
+
+    cout << padding
+         << string(promptPadding, ' ')
+         << prompt;
 
     cout << "\033[0m";
 }

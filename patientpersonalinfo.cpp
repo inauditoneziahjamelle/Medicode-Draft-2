@@ -774,55 +774,52 @@ void patientpersonalinfo(PatientData &patient)
     cout << endl;
     cout << endl;
     cout << endl;
-    cout << "\033[1;38;2;225;132;132m";
     cout << endl;
-    cout << "                                                                           +=============================================================+" << endl;
-    cout << "                                                                           ||                PATIENT INFORMATION SUMMARY                ||" << endl;
-    cout << "                                                                           +=============================================================+" << endl;
+    cout << "\033[31m                                                                           +=============================================================+\033[0m" << endl;
+    cout << "\033[31m                                                                           ||\033[0m                PATIENT INFORMATION SUMMARY                \033[31m||\033[0m" << endl;
+    cout << "\033[31m                                                                           +=============================================================+\033[0m" << endl;
 
-    cout << "                                                                                             Patient ID: " << patient.patientID << "             " << endl;
+    cout << "                                                                                               Patient ID: " << patient.patientID << "             " << endl;
 
 
     cout << "                                                                                                                                     " << endl;
-    cout << "                                                                            I. GENERAL DATA                                           " << endl;
-    cout << "                                                                            Name: " << patient.name << "                              " << endl;
-    cout << "                                                                            Age: " << patient.age << "                                " << endl;
-    cout << "                                                                            Sex: " << patient.sexChoice << "                          " << endl;
-    cout << "                                                                            Address: " << patient.address << "                        " << endl;
-    cout << "                                                                            Civil Status: " << patient.civilStatus << "               " << endl;
+    cout << "                                                                               I. GENERAL DATA                                           " << endl;
+    cout << "                                                                               Name: " << patient.name << "                              " << endl;
+    cout << "                                                                               Age: " << patient.age << "                                " << endl;
+    cout << "                                                                               Sex: " << patient.sexChoice << "                          " << endl;
+    cout << "                                                                               Address: " << patient.address << "                        " << endl;
+    cout << "                                                                               Civil Status: " << patient.civilStatus << "               " << endl;
 
     
     cout << endl;
-    cout << "                                                                            II. HISTORY OF PRESENT ILLNESS" << endl;
-    cout << "                                                                            Illnesses:"<<  patient.historyPresentIllness << endl;
+    cout << "                                                                               II. HISTORY OF PRESENT ILLNESS" << endl;
+    cout << "                                                                               Illnesses: " <<  patient.historyPresentIllness << endl;
 
 
     cout << endl;
-    cout << "                                                                            III. PAST MEDICAL HISTORY" << endl;
-    cout << "                                                                            Operations: " << patient.operations << endl;
-    cout << "                                                                            Immunizations: " << patient.immunizations << endl;
-    cout << "                                                                            Allergies: " << patient.allergies << endl;
-    cout << "                                                                            Hospitalizations: " << patient.hospitalizations << endl;
-    cout << "                                                                            Maintenance Medications: " << patient.maintenanceMeds << endl;
-    cout << "                                                                            Others: " << patient.othersMedical << endl;
+    cout << "                                                                               III. PAST MEDICAL HISTORY" << endl;
+    cout << "                                                                               Operations: " << patient.operations << endl;
+    cout << "                                                                               Immunizations: " << patient.immunizations << endl;
+    cout << "                                                                               Allergies: " << patient.allergies << endl;
+    cout << "                                                                               Hospitalizations: " << patient.hospitalizations << endl;
+    cout << "                                                                               Maintenance Medications: " << patient.maintenanceMeds << endl;
+    cout << "                                                                               Others: " << patient.othersMedical << endl;
 
 
     cout << endl;
-    cout << "                                                                            IV. FAMILY HISTORY" << endl;
-    cout << "                                                                            Bronchial Asthma: " << patient.bronchialAsthma << endl;
-    cout << "                                                                            Diabetes Mellitus: " << patient.diabetesMellitus << endl;
-    cout << "                                                                            Hypertension: " << patient.hypertension << endl;
-    cout << "                                                                            Pulmonary Tuberculosis: " << patient.pulmonaryTuberculosis << endl;
-    cout << "                                                                            Others: " << patient.othersFamily << endl;
+    cout << "                                                                               IV. FAMILY HISTORY" << endl;
+    cout << "                                                                               Bronchial Asthma: " << patient.bronchialAsthma << endl;
+    cout << "                                                                               Diabetes Mellitus: " << patient.diabetesMellitus << endl;
+    cout << "                                                                               Hypertension: " << patient.hypertension << endl;
+    cout << "                                                                               Pulmonary Tuberculosis: " << patient.pulmonaryTuberculosis << endl;
+    cout << "                                                                               Others: " << patient.othersFamily << endl;
 
 
     cout << endl;
-    cout << "                                                                            V. SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY" << endl;
-    cout << "                                                                            Smoker: " << patient.smoker << endl;
-    cout << "                                                                            Alcoholic Beverage Drinker: "
-         <<                                                                              patient.alcoholicBeverageDrinker << endl;
-    cout << "                                                                            Work/Environmental Hazards: "
-         <<                                                                              patient.workEnvironmentalHazards << endl;
+    cout << "                                                                               V. SOCIAL, ENVIRONMENTAL, PERSONAL HISTORY" << endl;
+    cout << "                                                                               Smoker: " << patient.smoker << endl;
+    cout << "                                                                               Alcoholic Beverage Drinker: " << patient.alcoholicBeverageDrinker << endl;
+    cout << "                                                                               Work/Environmental Hazards: " << patient.workEnvironmentalHazards << endl;
 
 
     // SHOW OB-GYNE SUMMARY ONLY FOR FEMALE
@@ -830,34 +827,31 @@ void patientpersonalinfo(PatientData &patient)
     if (patient.sexChoice == "Female")
     {
         cout << endl;
-        cout << "                                                                            VI. OB-GYNE HISTORY" << endl;
-        cout << "                                                                            Menarche: " << patient.menarche << endl;
-        cout << "                                                                            Menstrual History: " << patient.menstrualHistory << endl;
-        cout << "                                                                            Gravida: " << patient.gravida << endl;
-        cout << "                                                                            Para: " << patient.para << endl;
-        cout << "                                                                            Last Menstrual Period: "
-             <<                                                                              patient.lastMenstrualPeriod << endl;
-        cout << "                                                                            Menopause: " << patient.menopause << endl;
-        cout << "                                                                            Others: " << patient.othersOBGyne << endl;
+        cout << "                                                                               VI. OB-GYNE HISTORY" << endl;
+        cout << "                                                                               Menarche: " << patient.menarche << endl;
+        cout << "                                                                               Menstrual History: " << patient.menstrualHistory << endl;
+        cout << "                                                                               Gravida: " << patient.gravida << endl;
+        cout << "                                                                               Para: " << patient.para << endl;
+        cout << "                                                                               Last Menstrual Period: " << patient.lastMenstrualPeriod << endl;
+        cout << "                                                                               Menopause: " << patient.menopause << endl;
+        cout << "                                                                               Others: " << patient.othersOBGyne << endl;
+        cout << "\033[0m";
     }
 
 
     // FINAL OPTIONS
-    cout << "\033[0m";
-    cout << endl;
-    cout << "                                                                            =============================================" << endl;
-    cout << "                                                                                           1. Proceed" << endl;
-    cout << "                                                                                           2. Exit" << endl;
-    cout << endl;
-    cout << "                                                                                           Enter choice: ";
+    cout << "\033[31m                                                                           +=============================================================+\033[0m" << endl;
+    cout << "                                                                                                   1. Proceed" << endl;
+    cout << "                                                                                                   2. Exit" << endl;
+    cout << "                                                                                                   Enter choice: ";
     choice = readChoice(1, 2);
 
     if (choice == 1)
     {
         cout << endl;
-    cout << "                                                               +=============================================================+" << endl;
-    cout << "                                                               ||               \033[1mGENERAL PATIENT QUESTIONS\033[0m            ||" << endl; 
-    cout << "                                                               +=============================================================+" << endl;
+    cout << "\033[31m                                                                           +=============================================================+\033[0m" << endl;
+    cout << "\033[31m                                                                           ||               \033[1mGENERAL PATIENT QUESTIONS\033[0m                  \033[31m ||\033[0m" << endl; 
+    cout << "\033[31m                                                                           +=============================================================+\033[0m" << endl;
 
         SymptomData symptoms{};
         generalquestions(patient, symptoms);
